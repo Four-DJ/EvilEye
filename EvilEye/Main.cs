@@ -114,6 +114,8 @@ namespace EvilEye
             Main.Instance.modules.Add(new Event9());
             Main.Instance.modules.Add(new Event209());
             Main.Instance.modules.Add(new Event210());
+            Main.Instance.modules.Add(new AssetBundleCrash());
+            Main.Instance.modules.Add(new QuestCrash());
 
             Main.Instance.modules.Add(new RateLimit());
             Main.Instance.modules.Add(new Anti9());
