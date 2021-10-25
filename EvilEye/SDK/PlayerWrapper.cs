@@ -61,6 +61,16 @@ namespace EvilEye.SDK
             return selectMenu.field_Private_InterfacePublicAbstractStCoStBo1StBoSi1TeUnique_0;
         }
 
+        public static void SetHide(this VRCPlayer Instance, bool State)
+        {
+            Instance._player.SetHide(State);
+        }
+
+        public static void SetHide(this Player Instance, bool State)
+        {
+            Instance.transform.Find("ForwardDirection").gameObject.active = !State;
+        }
+
         public static void ChangeAvatar(string AvatarID)
         {
             PageAvatar component = GameObject.Find("Screens").transform.Find("Avatar").GetComponent<PageAvatar>();
@@ -80,6 +90,7 @@ namespace EvilEye.SDK
                     return GetAllPlayers()[i];
                 }
             }
+
 
             return null;
         }
