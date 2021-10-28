@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Core.Styles;
 using VRC.UI.Elements;
+using SelectedUserQM = MonoBehaviour1PublicBoRaGaLiGa1BuGaObBuUnique;
 //using VRC.UI.Elements.Menus;
 
 namespace EvilEye.SDK
@@ -24,7 +25,7 @@ namespace EvilEye.SDK
         public Image StandIcon;
 
         public UIElementPublicObCaBoObBoObObObUnique quickMenu;
-        public MonoBehaviour1PublicBoGaBuGaObBuGaObBuGaUnique selectedUserMenuQM;
+        public SelectedUserQM selectedUserMenuQM;
         public StyleEngine styleEngine;
 
         public Transform tabMenuTemplat;
@@ -48,7 +49,7 @@ namespace EvilEye.SDK
 
             Button_NameplateVisibleIcon = quickMenu.transform.Find("Container/Window/QMParent/Menu_Settings/Panel_QM_ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UI_Elements_Row_1/Button_NameplateControls/Buttons/Button A/Icon").GetComponent<Image>();
 
-            selectedUserMenuQM = quickMenu.transform.Find("Container/Window/QMParent/Menu_SelectedUser_Local").GetComponent<MonoBehaviour1PublicBoGaBuGaObBuGaObBuGaUnique>();
+            selectedUserMenuQM = quickMenu.transform.Find("Container/Window/QMParent/Menu_SelectedUser_Local").GetComponent<SelectedUserQM>();
             tabMenuTemplat = quickMenu.transform.Find("Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_DevTools");
             Menu_DevTools = quickMenu.transform.Find("Container/Window/QMParent/Menu_DevTools");
             QMParent = quickMenu.transform.Find("Container/Window/QMParent");

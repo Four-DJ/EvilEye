@@ -7,6 +7,7 @@ using UnityEngine;
 using VRC;
 using VRC.Core;
 using VRC.UI;
+using SelectedUserQM = MonoBehaviour1PublicBoRaGaLiGa1BuGaObBuUnique;
 
 namespace EvilEye.SDK
 {
@@ -56,7 +57,7 @@ namespace EvilEye.SDK
             }
         }
 
-        public static InterfacePublicAbstractStCoStBo1StBoSi1TeUnique GetSelectedUser(this MonoBehaviour1PublicBoGaBuGaObBuGaObBuGaUnique selectMenu)
+        public static InterfacePublicAbstractStCoStBo1StBoSi1TeUnique GetSelectedUser(this SelectedUserQM selectMenu)
         {
             return selectMenu.field_Private_InterfacePublicAbstractStCoStBo1StBoSi1TeUnique_0;
         }
@@ -74,7 +75,7 @@ namespace EvilEye.SDK
         public static void ChangeAvatar(string AvatarID)
         {
             PageAvatar component = GameObject.Find("Screens").transform.Find("Avatar").GetComponent<PageAvatar>();
-            component.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar
+            component.field_Public_MonoBehaviourPublicSiGaRuGaAcRu3StAvLiUnique_0.field_Private_ApiAvatar_0 = new ApiAvatar
             {
                 id = AvatarID
             };
