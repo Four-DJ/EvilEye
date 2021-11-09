@@ -537,8 +537,10 @@
     <Compile Include="Module\World\Rejoin.cs" />
     <Compile Include="Patches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SDK\ButtonAPI\QMMenu.cs" />
     <Compile Include="SDK\ButtonAPI\QMNestedButton.cs" />
     <Compile Include="SDK\ButtonAPI\QMSingleButton.cs" />
+    <Compile Include="SDK\ButtonAPI\QMTab.cs" />
     <Compile Include="SDK\ButtonAPI\QMToggleButton.cs" />
     <Compile Include="SDK\Config.cs" />
     <Compile Include="SDK\LoggerUtill.cs" />

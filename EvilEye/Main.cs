@@ -22,7 +22,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using VRC.Core;
 using VRC.UI.Core.Styles;
-using VRC.UI.Elements;
 
 namespace EvilEye
 {
@@ -79,35 +78,22 @@ namespace EvilEye
         {
         }
 
+
         [Obfuscation(Exclude = true)]
         private static void OnUIInit()
         {
             Main.Instance.quickMenuStuff = new QuickMenuStuff();
-            GameObject devTab = Main.Instance.quickMenuStuff.quickMenu.transform.Find("Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_DevTools").gameObject;
-            GameObject devMenu = Main.Instance.quickMenuStuff.quickMenu.transform.Find("Container/Window/QMParent/Menu_DevTools/Scrollrect/Viewport/VerticalLayoutGroup/Buttons").gameObject;
-            devTab.GetComponent<Button>().onClick.AddListener(new Action(() =>
-            {
-                for (int i = 0; i < devMenu.transform.transform.childCount; i++)
-                    devMenu.transform.transform.GetChild(i).gameObject.SetActive(true);
-            }));
-            Main.Instance.quickMenuStuff.quickMenu.transform.Find("Container/Window/QMParent/Menu_DevTools/Header_DevTools/LeftItemContainer/Text_Title").GetComponent<TextMeshProUGUI>().text = "EvilEye";
-            for (int i = 0; i < devMenu.transform.transform.childCount; i++)
-                GameObject.Destroy(devMenu.transform.transform.GetChild(i).gameObject);
-            UnityEngine.Object.Destroy(devTab.transform.Find("Icon").GetComponent<StyleElement>());
-            Image devTabImage = devTab.transform.Find("Icon").GetComponent<Image>();
-            devTab.GetComponent<UiTooltip>().field_Public_String_0 = "EvilEye";
-            devTabImage.sprite = Main.Instance.quickMenuStuff.Button_NameplateVisibleIcon.sprite;
-            devTabImage.color = Main.Instance.quickMenuStuff.quickMenu.transform.Find("Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Notifications/Icon").GetComponent<Image>().color;
-            devTab.SetActive(true);
 
-            Main.Instance.worldButton = new QMNestedButton(devMenu.transform, "World", Main.Instance.quickMenuStuff.StandIcon.sprite);
-            Main.Instance.playerButton = new QMNestedButton(devMenu.transform, "Player", Main.Instance.quickMenuStuff.StandIcon.sprite);
-            Main.Instance.movementButton = new QMNestedButton(devMenu.transform, "Movement", Main.Instance.quickMenuStuff.StandIcon.sprite);
-            Main.Instance.exploistButton = new QMNestedButton(devMenu.transform, "Exploits", Main.Instance.quickMenuStuff.StandIcon.sprite);
-            Main.Instance.spoofersButton = new QMNestedButton(devMenu.transform, "Spoofers", Main.Instance.quickMenuStuff.StandIcon.sprite);
-            Main.Instance.safetyButton = new QMNestedButton(devMenu.transform, "Safety", Main.Instance.quickMenuStuff.StandIcon.sprite);
-            Main.Instance.botButton = new QMNestedButton(devMenu.transform, "Bot", Main.Instance.quickMenuStuff.StandIcon.sprite);
-            Main.Instance.settingsButton = new QMNestedButton(devMenu.transform, "Settings", Main.Instance.quickMenuStuff.StandIcon.sprite);
+            QMTab mainTab = new QMTab("EvilEye","EvilEye", "Watching You", Main.Instance.quickMenuStuff.Button_NameplateVisibleIcon.sprite);
+            
+            Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World", Main.Instance.quickMenuStuff.StandIcon.sprite, mainTab.menu.page.field_Public_String_0);
+            Main.Instance.playerButton = new QMNestedButton(mainTab.menuTransform, "Player", Main.Instance.quickMenuStuff.StandIcon.sprite, mainTab.menu.page.field_Public_String_0);
+            Main.Instance.movementButton = new QMNestedButton(mainTab.menuTransform, "Movement", Main.Instance.quickMenuStuff.StandIcon.sprite, mainTab.menu.page.field_Public_String_0);
+            Main.Instance.exploistButton = new QMNestedButton(mainTab.menuTransform, "Exploits", Main.Instance.quickMenuStuff.StandIcon.sprite, mainTab.menu.page.field_Public_String_0);
+            Main.Instance.spoofersButton = new QMNestedButton(mainTab.menuTransform, "Spoofers", Main.Instance.quickMenuStuff.StandIcon.sprite, mainTab.menu.page.field_Public_String_0);
+            Main.Instance.safetyButton = new QMNestedButton(mainTab.menuTransform, "Safety", Main.Instance.quickMenuStuff.StandIcon.sprite, mainTab.menu.page.field_Public_String_0);
+            Main.Instance.botButton = new QMNestedButton(mainTab.menuTransform, "Bot", Main.Instance.quickMenuStuff.StandIcon.sprite, mainTab.menu.page.field_Public_String_0);
+            Main.Instance.settingsButton = new QMNestedButton(mainTab.menuTransform, "Settings", Main.Instance.quickMenuStuff.StandIcon.sprite, mainTab.menu.page.field_Public_String_0);
 
             Main.Instance.modules.Add(new Fly());
 
@@ -139,7 +125,7 @@ namespace EvilEye
                 if (avatar.releaseStatus == "public")
                     PlayerWrapper.ChangeAvatar(avatar.id);
             });
-
+            
             LoggerUtill.Log("[UI] Done", ConsoleColor.Green);
         }
 

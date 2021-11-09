@@ -43,7 +43,7 @@ namespace EvilEye.Module
         {
             if (isToggle)
             {
-                QMToggleButton qMToggleButton = new QMToggleButton(category.buttonMenu, name, discription, image, new Action<bool>((bool state) =>
+                QMToggleButton qMToggleButton = new QMToggleButton(category.menuTransform, name, discription, image, new Action<bool>((bool state) =>
                 {
                     this.toggled = state;
                     if (state)
@@ -62,7 +62,7 @@ namespace EvilEye.Module
             }
             else
             {
-                new QMSingleButton(category.buttonMenu, name, discription, image, delegate
+                new QMSingleButton(category.menuTransform, name, discription, image, delegate
                 {
                     OnEnable();
                 });

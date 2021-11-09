@@ -23,19 +23,20 @@ namespace EvilEye.SDK
         public Image Button_RespawnIcon;
         public Image StandIcon;
 
-        public QuickMenu quickMenu;
+        public VRC.UI.Elements.QuickMenu quickMenu;
         public SelectedUserMenuQM selectedUserMenuQM;
-        public StyleEngine styleEngine;
+        public MenuStateController menuStateController;
 
         public Transform tabMenuTemplat;
         public Transform Menu_DevTools;
+        public Transform Menu_Dashboard;
         public Transform QMParent;
         public Transform page_Buttons_QM;
 
         public QuickMenuStuff()
         {
-            quickMenu = Resources.FindObjectsOfTypeAll<QuickMenu>().First();
-            styleEngine = quickMenu.gameObject.GetComponent<StyleEngine>();
+            quickMenu = Resources.FindObjectsOfTypeAll<VRC.UI.Elements.QuickMenu>().First();
+            menuStateController = quickMenu.gameObject.GetComponent<MenuStateController>();
 
             Button_WorldsIcon = quickMenu.transform.Find("Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickLinks/Button_Worlds/Icon").GetComponent<Image>();
             Button_AvatarsIcon = quickMenu.transform.Find("Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickLinks/Button_Avatars/Icon").GetComponent<Image>();
@@ -53,6 +54,7 @@ namespace EvilEye.SDK
             Menu_DevTools = quickMenu.transform.Find("Container/Window/QMParent/Menu_DevTools");
             QMParent = quickMenu.transform.Find("Container/Window/QMParent");
             page_Buttons_QM = quickMenu.transform.Find("Container/Window/Page_Buttons_QM/HorizontalLayoutGroup");
+            Menu_Dashboard = quickMenu.transform.Find("Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Settings");
         }
 
     }
