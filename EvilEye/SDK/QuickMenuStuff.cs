@@ -7,8 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Core.Styles;
 using VRC.UI.Elements;
-using SelectedUserQM = MonoBehaviour1PublicBoRaGaLiGa1BuGaObBuUnique;
-//using VRC.UI.Elements.Menus;
+using VRC.UI.Elements.Menus;
 
 namespace EvilEye.SDK
 {
@@ -24,8 +23,8 @@ namespace EvilEye.SDK
         public Image Button_RespawnIcon;
         public Image StandIcon;
 
-        public UIElementPublicObCaBoObBoObObObUnique quickMenu;
-        public SelectedUserQM selectedUserMenuQM;
+        public QuickMenu quickMenu;
+        public SelectedUserMenuQM selectedUserMenuQM;
         public StyleEngine styleEngine;
 
         public Transform tabMenuTemplat;
@@ -35,7 +34,7 @@ namespace EvilEye.SDK
 
         public QuickMenuStuff()
         {
-            quickMenu = Resources.FindObjectsOfTypeAll<UIElementPublicObCaBoObBoObObObUnique>().First();
+            quickMenu = Resources.FindObjectsOfTypeAll<QuickMenu>().First();
             styleEngine = quickMenu.gameObject.GetComponent<StyleEngine>();
 
             Button_WorldsIcon = quickMenu.transform.Find("Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickLinks/Button_Worlds/Icon").GetComponent<Image>();
@@ -49,7 +48,7 @@ namespace EvilEye.SDK
 
             Button_NameplateVisibleIcon = quickMenu.transform.Find("Container/Window/QMParent/Menu_Settings/Panel_QM_ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UI_Elements_Row_1/Button_NameplateControls/Buttons/Button A/Icon").GetComponent<Image>();
 
-            selectedUserMenuQM = quickMenu.transform.Find("Container/Window/QMParent/Menu_SelectedUser_Local").GetComponent<SelectedUserQM>();
+            selectedUserMenuQM = quickMenu.transform.Find("Container/Window/QMParent/Menu_SelectedUser_Local").GetComponent<SelectedUserMenuQM>();
             tabMenuTemplat = quickMenu.transform.Find("Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_DevTools");
             Menu_DevTools = quickMenu.transform.Find("Container/Window/QMParent/Menu_DevTools");
             QMParent = quickMenu.transform.Find("Container/Window/QMParent");

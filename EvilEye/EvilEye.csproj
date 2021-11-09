@@ -519,9 +519,11 @@
     <Compile Include="Main.cs" />
     <Compile Include="Module\BaseModule.cs" />
     <Compile Include="Module\CustomNameplate.cs" />
+    <Compile Include="Module\Exploit\AssetBundleCrash.cs" />
     <Compile Include="Module\Exploit\Event209.cs" />
     <Compile Include="Module\Exploit\Event210.cs" />
     <Compile Include="Module\Exploit\Event9.cs" />
+    <Compile Include="Module\Exploit\QuestCrash.cs" />
     <Compile Include="Module\Movement\Fly.cs" />
     <Compile Include="Module\Safety\Anti209.cs" />
     <Compile Include="Module\Safety\Anti210.cs" />

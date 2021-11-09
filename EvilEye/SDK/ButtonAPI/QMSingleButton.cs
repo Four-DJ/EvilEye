@@ -21,7 +21,7 @@ namespace EvilEye.SDK.ButtonAPI
             singleButton.transform.Find("Text_H4").gameObject.GetComponent<TextMeshProUGUI>().text = text;
             if(Icon != null)
                 singleButton.transform.Find("Icon").GetComponent<Image>().sprite = Icon;
-            singleButton.GetComponent<MonoBehaviourPublicIPointerEnterHandlerIEventSystemHandlerIPointerExitHandler1StBoStBo1StBoStStUnique>().field_Public_String_0 = toolTip;
+            singleButton.GetComponent<UiTooltip>().field_Public_String_0 = toolTip;
             Button button = singleButton.GetComponent<Button>();
             button.onClick = new Button.ButtonClickedEvent();
             button.onClick.AddListener(action);

@@ -18,6 +18,7 @@ using Transmtn;
 using UnityEngine;
 using UnityEngine.Networking;
 using VRC.SDKBase;
+using VRC.UI.Elements;
 
 namespace EvilEye
 {
@@ -68,7 +69,7 @@ namespace EvilEye
 
             try
             {
-                Instance.Patch(typeof(UIElementPublicObCaBoObBoObObObUnique).GetMethod("Awake"),null, new HarmonyMethod(AccessTools.Method(typeof(Main), "OnUIInit")));
+                Instance.Patch(typeof(QuickMenu).GetMethod("Awake"),null, new HarmonyMethod(AccessTools.Method(typeof(Main), "OnUIInit")));
                 
                 LoggerUtill.Log("[Patch] UI", ConsoleColor.Green);
             }

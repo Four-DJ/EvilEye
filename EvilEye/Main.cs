@@ -95,7 +95,7 @@ namespace EvilEye
                 GameObject.Destroy(devMenu.transform.transform.GetChild(i).gameObject);
             UnityEngine.Object.Destroy(devTab.transform.Find("Icon").GetComponent<StyleElement>());
             Image devTabImage = devTab.transform.Find("Icon").GetComponent<Image>();
-            devTab.GetComponent<MonoBehaviourPublicIPointerEnterHandlerIEventSystemHandlerIPointerExitHandler1StBoStBo1StBoStStUnique>().field_Public_String_0 = "EvilEye";
+            devTab.GetComponent<UiTooltip>().field_Public_String_0 = "EvilEye";
             devTabImage.sprite = Main.Instance.quickMenuStuff.Button_NameplateVisibleIcon.sprite;
             devTabImage.color = Main.Instance.quickMenuStuff.quickMenu.transform.Find("Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Notifications/Icon").GetComponent<Image>().color;
             devTab.SetActive(true);
