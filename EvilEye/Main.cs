@@ -103,6 +103,8 @@ namespace EvilEye
             Main.Instance.modules.Add(new Event210());
             Main.Instance.modules.Add(new AssetBundleCrash());
             Main.Instance.modules.Add(new QuestCrash());
+            Main.Instance.modules.Add(new VRCA());
+            Main.Instance.modules.Add(new VRCW());
 
             Main.Instance.modules.Add(new RateLimit());
             Main.Instance.modules.Add(new Anti9());
@@ -155,13 +157,6 @@ namespace EvilEye
 
             Process.GetCurrentProcess().Kill();
         }
-        private static void InitFolders()
-        {
-            if (!Directory.Exists("EvilEye"))
-            {
-                Directory.CreateDirectory("WingsClient");
-                MelonLogger.Msg("Created Directory 'EvilEye'");
-            }
-        }
+       
     }
 }
