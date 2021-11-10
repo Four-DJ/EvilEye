@@ -18,7 +18,7 @@ namespace EvilEye.SDK.ButtonAPI
 
 		public QMTab(string menuName,string pagetitle, string tooltip, Sprite icon = null)
 		{
-            menu = new QMMenu(menuName, pagetitle,"",true,false);
+            menu = new QMMenu(menuName, pagetitle,true,false);
             menuTransform = menu.menuContents;
 
             GameObject tab = UnityEngine.Object.Instantiate<GameObject>(Main.Instance.quickMenuStuff.quickMenu.transform.Find("Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_DevTools").gameObject, Main.Instance.quickMenuStuff.quickMenu.transform.Find("Container/Window/Page_Buttons_QM/HorizontalLayoutGroup"));

@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Elements;
+using VRC.UI.Elements.Menus;
 
 namespace EvilEye.SDK.ButtonAPI
 {
@@ -15,12 +16,14 @@ namespace EvilEye.SDK.ButtonAPI
 		public UIPage page;
 		public Transform menuContents;
 
-		public QMMenu(string menuName, string pageTitle,string perantname = "", bool root = true, bool backButton = true)
+		public QMMenu(string menuName, string pageTitle, bool root = true, bool backButton = true)
 		{
 			GameObject menu = UnityEngine.Object.Instantiate<GameObject>(Main.Instance.quickMenuStuff.quickMenu.transform.Find("Container/Window/QMParent/Menu_DevTools").gameObject, Main.Instance.quickMenuStuff.quickMenu.transform.Find("Container/Window/QMParent"));
 			menu.name = "Menu_" + menuName;
 			menu.transform.SetSiblingIndex(5);
 			menu.SetActive(false);
+
+			UnityEngine.Object.Destroy(menu.GetComponent<DevMenu>());
 
 			page = menu.AddComponent<UIPage>();
 			page.field_Public_String_0 = menuName;
@@ -28,6 +31,18 @@ namespace EvilEye.SDK.ButtonAPI
 			page.field_Private_MenuStateController_0 = Main.Instance.quickMenuStuff.menuStateController;
 			page.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
 			page.field_Private_List_1_UIPage_0.Add(page);
+            if (!root)
+            {
+				page.field_Public_Boolean_0 = true;
+                try
+                {
+					menu.transform.Find("Scrollrect/Scrollbar").gameObject.SetActive(true);
+					menu.transform.Find("Scrollrect").GetComponent<ScrollRect>().enabled = true;
+					menu.transform.Find("Scrollrect").GetComponent<ScrollRect>().verticalScrollbar = menu.transform.Find("Scrollrect/Scrollbar").GetComponent<Scrollbar>();
+					menu.transform.Find("Scrollrect").GetComponent<ScrollRect>().verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.AutoHide;
+				}
+                catch { }
+			}
 			Main.Instance.quickMenuStuff.menuStateController.field_Private_Dictionary_2_String_UIPage_0.Add(menuName, page);
 			if (root)
 			{
@@ -47,25 +62,9 @@ namespace EvilEye.SDK.ButtonAPI
 				backButtonGameObject.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
 				backButtonGameObject.GetComponent<Button>().onClick.AddListener(new Action(() =>
 				{
-					Main.Instance.quickMenuStuff.menuStateController.Method_Public_Void_String_Boolean_0(perantname, false);
+					page.Method_Protected_Virtual_New_Void_0();
 				}));
 			}
-			/*GameObject backButtonGameObject = menu.transform.Find("Header_DevTools/LeftItemContainer/Button_Back").gameObject;
-			bool isRoot = root;
-			backButtonGameObject.SetActive(backButton);
-			backButtonGameObject.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
-			backButtonGameObject.GetComponentInChildren<Button>().onClick.AddListener(new Action (() =>
-			{
-				if (isRoot)
-				{
-					Main.Instance.quickMenuStuff.menuStateController.Method_Public_Void_String_Boolean_0("QuickMenuDashboard", false);
-					return;
-				}
-				page.Method_Protected_Virtual_New_Void_0();
-			}));
-			menu.transform.Find("Scrollrect/Scrollbar").GetComponent<ScrollRect>().enabled = true;
-			menu.transform.Find("Scrollrect/Scrollbar").GetComponent<ScrollRect>().verticalScrollbar = page.transform.Find("ScrollRect/Scrollbar").GetComponent<Scrollbar>();
-			menu.transform.Find("Scrollrect/Scrollbar").GetComponent<ScrollRect>().verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.AutoHide;*/
 		}
 
 		public void OpenMenu()

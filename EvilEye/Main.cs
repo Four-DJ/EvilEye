@@ -86,14 +86,14 @@ namespace EvilEye
 
             QMTab mainTab = new QMTab("EvilEye","EvilEye", "Watching You", Main.Instance.quickMenuStuff.Button_NameplateVisibleIcon.sprite);
             
-            Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World", Main.Instance.quickMenuStuff.StandIcon.sprite, mainTab.menu.page.field_Public_String_0);
-            Main.Instance.playerButton = new QMNestedButton(mainTab.menuTransform, "Player", Main.Instance.quickMenuStuff.StandIcon.sprite, mainTab.menu.page.field_Public_String_0);
-            Main.Instance.movementButton = new QMNestedButton(mainTab.menuTransform, "Movement", Main.Instance.quickMenuStuff.StandIcon.sprite, mainTab.menu.page.field_Public_String_0);
-            Main.Instance.exploistButton = new QMNestedButton(mainTab.menuTransform, "Exploits", Main.Instance.quickMenuStuff.StandIcon.sprite, mainTab.menu.page.field_Public_String_0);
-            Main.Instance.spoofersButton = new QMNestedButton(mainTab.menuTransform, "Spoofers", Main.Instance.quickMenuStuff.StandIcon.sprite, mainTab.menu.page.field_Public_String_0);
-            Main.Instance.safetyButton = new QMNestedButton(mainTab.menuTransform, "Safety", Main.Instance.quickMenuStuff.StandIcon.sprite, mainTab.menu.page.field_Public_String_0);
-            Main.Instance.botButton = new QMNestedButton(mainTab.menuTransform, "Bot", Main.Instance.quickMenuStuff.StandIcon.sprite, mainTab.menu.page.field_Public_String_0);
-            Main.Instance.settingsButton = new QMNestedButton(mainTab.menuTransform, "Settings", Main.Instance.quickMenuStuff.StandIcon.sprite, mainTab.menu.page.field_Public_String_0);
+            Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World", Main.Instance.quickMenuStuff.StandIcon.sprite);
+            Main.Instance.playerButton = new QMNestedButton(mainTab.menuTransform, "Player", Main.Instance.quickMenuStuff.StandIcon.sprite);
+            Main.Instance.movementButton = new QMNestedButton(mainTab.menuTransform, "Movement", Main.Instance.quickMenuStuff.StandIcon.sprite);
+            Main.Instance.exploistButton = new QMNestedButton(mainTab.menuTransform, "Exploits", Main.Instance.quickMenuStuff.StandIcon.sprite);
+            Main.Instance.spoofersButton = new QMNestedButton(mainTab.menuTransform, "Spoofers", Main.Instance.quickMenuStuff.StandIcon.sprite);
+            Main.Instance.safetyButton = new QMNestedButton(mainTab.menuTransform, "Safety", Main.Instance.quickMenuStuff.StandIcon.sprite);
+            Main.Instance.botButton = new QMNestedButton(mainTab.menuTransform, "Bot", Main.Instance.quickMenuStuff.StandIcon.sprite);
+            Main.Instance.settingsButton = new QMNestedButton(mainTab.menuTransform, "Settings", Main.Instance.quickMenuStuff.StandIcon.sprite);
 
             Main.Instance.modules.Add(new Fly());
 
