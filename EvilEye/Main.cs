@@ -124,8 +124,8 @@ namespace EvilEye
 
             new QMSingleButton(Main.Instance.quickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions").transform, "VRCA", "Download Users VRCA", Main.Instance.quickMenuStuff.Button_AvatarsIcon.sprite, delegate
             {
-                Application.OpenURL(QuickMenu.prop_QuickMenu_0.field_Private_Player_0.prop_VRCPlayer_0
-                       .prop_ApiAvatar_1.assetUrl);
+                ApiAvatar avatar = PlayerWrapper.GetByUsrID(Main.Instance.quickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_ApiAvatar_0;
+                Application.OpenURL(avatar.assetUrl);
             });
 
             new QMSingleButton(Main.Instance.quickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions").transform, "ForceClone", "ForceClone", Main.Instance.quickMenuStuff.Button_AvatarsIcon.sprite, delegate
