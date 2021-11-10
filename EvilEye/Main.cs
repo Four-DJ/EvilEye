@@ -12,6 +12,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -84,8 +85,8 @@ namespace EvilEye
         {
             Main.Instance.quickMenuStuff = new QuickMenuStuff();
 
-            QMTab mainTab = new QMTab("EvilEye","EvilEye", "Watching You", Main.Instance.quickMenuStuff.Button_NameplateVisibleIcon.sprite);
-            
+            QMTab mainTab = new QMTab("EvilEye", "EvilEye", "Watching You", Main.Instance.quickMenuStuff.Button_NameplateVisibleIcon.sprite);
+
             Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World", Main.Instance.quickMenuStuff.StandIcon.sprite);
             Main.Instance.playerButton = new QMNestedButton(mainTab.menuTransform, "Player", Main.Instance.quickMenuStuff.StandIcon.sprite);
             Main.Instance.movementButton = new QMNestedButton(mainTab.menuTransform, "Movement", Main.Instance.quickMenuStuff.StandIcon.sprite);
@@ -119,15 +120,23 @@ namespace EvilEye
             foreach (BaseModule module in Main.Instance.modules)
                 module.OnUIInit();
 
+            new QMSingleButton(Main.Instance.quickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions").transform, "VRCA", "Download Users VRCA", Main.Instance.quickMenuStuff.Button_AvatarsIcon.sprite, delegate
+            {
+                Application.OpenURL(QuickMenu.prop_QuickMenu_0.field_Private_Player_0.prop_VRCPlayer_0
+                       .prop_ApiAvatar_1.assetUrl);
+            });
+
             new QMSingleButton(Main.Instance.quickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions").transform, "ForceClone", "ForceClone", Main.Instance.quickMenuStuff.Button_AvatarsIcon.sprite, delegate
             {
                 ApiAvatar avatar = PlayerWrapper.GetByUsrID(Main.Instance.quickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_ApiAvatar_0;
                 if (avatar.releaseStatus == "public")
                     PlayerWrapper.ChangeAvatar(avatar.id);
             });
-            
+
             LoggerUtill.Log("[UI] Done", ConsoleColor.Green);
         }
+
+
 
         public static void OnGUI()
         {
@@ -136,7 +145,7 @@ namespace EvilEye
 
         public static void OnApplicationQuit()
         {
-            foreach(BaseModule module in Main.Instance.modules)
+            foreach (BaseModule module in Main.Instance.modules)
             {
                 if (module.save)
                 {
@@ -145,6 +154,14 @@ namespace EvilEye
             }
 
             Process.GetCurrentProcess().Kill();
+        }
+        private static void InitFolders()
+        {
+            if (!Directory.Exists("EvilEye"))
+            {
+                Directory.CreateDirectory("WingsClient");
+                MelonLogger.Msg("Created Directory 'EvilEye'");
+            }
         }
     }
 }
