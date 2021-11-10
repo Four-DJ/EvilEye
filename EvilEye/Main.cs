@@ -2,6 +2,7 @@
 using EvilEye.Module;
 using EvilEye.Module.Exploit;
 using EvilEye.Module.Movement;
+using EvilEye.Module.Player;
 using EvilEye.Module.Safety;
 using EvilEye.Module.Settings;
 using EvilEye.Module.World;
@@ -97,6 +98,9 @@ namespace EvilEye
             Main.Instance.settingsButton = new QMNestedButton(mainTab.menuTransform, "Settings", Main.Instance.quickMenuStuff.StandIcon.sprite);
 
             Main.Instance.modules.Add(new Fly());
+
+            Main.Instance.modules.Add(new XBoxMic());
+            Main.Instance.modules.Add(new LoudMic());
 
             Main.Instance.modules.Add(new Event9());
             Main.Instance.modules.Add(new Event209());

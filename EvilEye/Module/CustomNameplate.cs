@@ -14,7 +14,7 @@ namespace EvilEye.Module
 {
     class CustomNameplate : MonoBehaviour
     {
-        public Player player;
+        public VRC.Player player;
         private byte one;
         private byte zero;
         private int count = 0;

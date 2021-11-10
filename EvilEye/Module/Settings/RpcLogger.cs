@@ -27,7 +27,7 @@ namespace EvilEye.Module.Settings
             Main.Instance.onRPCEvents.Remove(this);
         }
 
-        public bool OnRPC(Player sender, VRC_EventHandler.VrcEvent vrcEvent, VRC_EventHandler.VrcBroadcastType vrcBroadcastType, int instagatorId, float fastforward)
+        public bool OnRPC(VRC.Player sender, VRC_EventHandler.VrcEvent vrcEvent, VRC_EventHandler.VrcBroadcastType vrcBroadcastType, int instagatorId, float fastforward)
         {
             string output = "[RPC] ";
 

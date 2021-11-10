@@ -3,44 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WatchDogs2.Events;
-using WatchDogs2.Settings;
+using EvilEye.SDK;
+using EvilEye.Module;
+using EvilEye.Events;
 
-namespace WatchDogs2.Modules.Player
+namespace EvilEye.Module.Player
 {
-    class XBoxMic : WDModule, OnUpdateEvent
+    class XBoxMic : BaseModule
     {
-        public XBoxMic() : base("XBoxMic", "CoD lobby", Categories.Player, new Setting[] { new Setting("Bitrate",new object[] {
-            BitRate.BitRate_8K,
-            BitRate.BitRate_10K,
-            BitRate.BitRate_16K,
-            BitRate.BitRate_18K,
-            BitRate.BitRate_20K,
-            BitRate.BitRate_24K,
-            BitRate.BitRate_32K,
-            BitRate.BitRate_48K,
-            BitRate.BitRate_64k,
-            BitRate.BitRate_96k,
-            BitRate.BitRate_128k,
-            BitRate. BitRate_256k,
-            BitRate.BitRate_384k,
-            BitRate.BitRate_512k
-        },0) }) { }
+        public XBoxMic() : base("XboxMic", "1v1 in COD bro", Main.Instance.playerButton, null, true) { }
+          
+        
 
         public override void OnEnable()
         {
-            Main.Instance.onUpdateEvents.Add(this);
+            VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_USpeaker_0.field_Public_BitRate_0 = BitRate.BitRate_8K;
         }
 
         public override void OnDisable()
         {
-            Main.Instance.onUpdateEvents.Remove(this);
+        
             VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_USpeaker_0.field_Public_BitRate_0 = BitRate.BitRate_24K;
         }
 
-        public void OnUpdate()
-        {
-            VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_USpeaker_0.field_Public_BitRate_0 = (BitRate)settings[0].o_val[settings[0].selected];
-        }
+    
     }
 }

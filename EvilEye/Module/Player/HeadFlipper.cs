@@ -1,36 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 using UnityEngine;
-using WatchDogs2.Events;
+using EvilEye.SDK;
+using EvilEye.Module;
+using EvilEye.Events;
+using VRC.DataModel;
 
-namespace WatchDogs2.Modules.Player
+namespace EvilEye.Module.Player
 {
-    class HeadFlipper : WDModule, OnUpdateEvent
+    class HeadFlipper : BaseModule
     {
 
-        public HeadFlipper() : base("HeadFlipper", "Rotate", Categories.Player) { }
-        Vector3 original;
-        NeckMouseRotator neck;
+        public HeadFlipper() : base("HeadFlipper", "Fuck your desktop neck", Main.Instance.playerButton, null, true) { }
+        NeckRange original;
+        MonoBehaviourPublicObSiBoSiVeBoQuVeBoSiUnique neck;
         public override void OnEnable()
         {
-            Main.Instance.onUpdateEvents.Add(this);
-            neck = GameObject.Find("/_Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Neck").GetComponent<NeckMouseRotator>();
-            original = neck.field_Public_Vector3_0;
+            neck = GameObject.Find("/_Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Neck").GetComponent<MonoBehaviourPublicObSiBoSiVeBoQuVeBoSiUnique>();
+            original = neck.field_Public_NeckRange_0;
+            neck.field_Public_NeckRange_0 = new NeckRange(-360, 360, 0);
         }
 
         public override void OnDisable()
         {
-            Main.Instance.onUpdateEvents.Remove(this);
-            neck.field_Public_Vector3_0 = new Vector3(-70, 0, 80);
+            neck.field_Public_NeckRange_0 = original;
         }
-
-        public void OnUpdate()
-        {
-            neck.field_Public_Vector3_0 = original * 4;
-        }
-
     }
 }

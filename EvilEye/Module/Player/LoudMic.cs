@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EvilEye.Module;
 
-namespace WatchDogs2.Modules.Player
+namespace EvilEye.Module.Player
 {
-    class LoudMic : WDModule
+    class LoudMic : BaseModule
     {
-        public LoudMic() : base("LoudMic", "Scream", Categories.Player) { }
+        public LoudMic() : base("LoudMic", "Microphone Go Brrrr", Main.Instance.playerButton, Main.Instance.quickMenuStuff.Button_AvatarsIcon.sprite, true) { }
 
         public override void OnEnable()
         {
