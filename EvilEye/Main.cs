@@ -126,6 +126,7 @@ namespace EvilEye
             {
                 ApiAvatar avatar = PlayerWrapper.GetByUsrID(Main.Instance.quickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_ApiAvatar_0;
                 Application.OpenURL(avatar.assetUrl);
+                LoggerUtill.Log("Downloaded Selected User VRCA Completed");
             });
 
             new QMSingleButton(Main.Instance.quickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions").transform, "ForceClone", "ForceClone", Main.Instance.quickMenuStuff.Button_AvatarsIcon.sprite, delegate
