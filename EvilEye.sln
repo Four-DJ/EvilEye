@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvilEye", "EvilEye\EvilEye.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvilLoader", "EvilLoader\EvilLoader.csproj", "{0EF2D680-B575-4962-B2E5-14E7B9449950}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvilBot", "EvilBot\EvilBot.csproj", "{EFAA1112-B48C-451B-9451-2832E86DE13F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{0EF2D680-B575-4962-B2E5-14E7B9449950}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EF2D680-B575-4962-B2E5-14E7B9449950}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EF2D680-B575-4962-B2E5-14E7B9449950}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EFAA1112-B48C-451B-9451-2832E86DE13F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EFAA1112-B48C-451B-9451-2832E86DE13F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EFAA1112-B48C-451B-9451-2832E86DE13F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EFAA1112-B48C-451B-9451-2832E86DE13F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
