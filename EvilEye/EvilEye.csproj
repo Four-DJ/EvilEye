@@ -214,7 +214,7 @@
     </Reference>
     <Reference Include="MelonLoader, Version=0.4.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\VRChats\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>..\..\..\..\..\..\VRChats\steamapps\common\VRChat\MelonLoader\Managed\netstandard.dll</HintPath>

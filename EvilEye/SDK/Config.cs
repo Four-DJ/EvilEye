@@ -20,6 +20,14 @@ namespace EvilEye.SDK
             {
                 File.Create("EvilEye/Config.ini");
             }
+            if (!Directory.Exists("EvilEye/VRCA"))
+            {
+                Directory.CreateDirectory("EvilEye/VRCA");
+            }
+            if (!Directory.Exists("EvilEye/VRCW"))
+            {
+                Directory.CreateDirectory("EvilEye/VRCW");
+            }
         }
 
         public int getConfigInt(string key, int defaultVal)
