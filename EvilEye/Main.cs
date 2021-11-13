@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -130,7 +131,14 @@ namespace EvilEye
             new QMSingleButton(Main.Instance.quickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions").transform, "VRCA", "Download Users VRCA", Main.Instance.quickMenuStuff.Button_AvatarsIcon.sprite, delegate
             {
                 ApiAvatar avatar = PlayerWrapper.GetByUsrID(Main.Instance.quickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_ApiAvatar_0;
-                Application.OpenURL(avatar.assetUrl);
+                WebClient webClient = new WebClient
+                {
+                    Headers =
+                    {
+                        "User-Agent: Other"
+                    }
+                };
+                webClient.DownloadFileAsync(new Uri(avatar.assetUrl), "EvilEye/VRCA/" + avatar.name);
                 LoggerUtill.Log("Downloaded Selected User VRCA Completed");
             });
 
