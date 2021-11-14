@@ -91,15 +91,15 @@ namespace EvilEye
 
             QMTab mainTab = new QMTab("EvilEye", "EvilEye", "Watching You", Main.Instance.quickMenuStuff.Button_NameplateVisibleIcon.sprite);
 
-            Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World", Main.Instance.quickMenuStuff.StandIcon.sprite);
-            Main.Instance.playerButton = new QMNestedButton(mainTab.menuTransform, "Player", Main.Instance.quickMenuStuff.StandIcon.sprite);
-            Main.Instance.movementButton = new QMNestedButton(mainTab.menuTransform, "Movement", Main.Instance.quickMenuStuff.StandIcon.sprite);
-            Main.Instance.exploistButton = new QMNestedButton(mainTab.menuTransform, "Exploits", Main.Instance.quickMenuStuff.StandIcon.sprite);
-            Main.Instance.spoofersButton = new QMNestedButton(mainTab.menuTransform, "Spoofers", Main.Instance.quickMenuStuff.StandIcon.sprite);
-            Main.Instance.safetyButton = new QMNestedButton(mainTab.menuTransform, "Safety", Main.Instance.quickMenuStuff.StandIcon.sprite);
-            Main.Instance.rendererButton = new QMNestedButton(mainTab.menuTransform, "Renderer", null);
-            Main.Instance.botButton = new QMNestedButton(mainTab.menuTransform, "Bot", Main.Instance.quickMenuStuff.StandIcon.sprite);
-            Main.Instance.settingsButton = new QMNestedButton(mainTab.menuTransform, "Settings", Main.Instance.quickMenuStuff.StandIcon.sprite);
+            Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World");
+            Main.Instance.playerButton = new QMNestedButton(mainTab.menuTransform, "Player");
+            Main.Instance.movementButton = new QMNestedButton(mainTab.menuTransform, "Movement");
+            Main.Instance.exploistButton = new QMNestedButton(mainTab.menuTransform, "Exploits");
+            Main.Instance.spoofersButton = new QMNestedButton(mainTab.menuTransform, "Spoofers");
+            Main.Instance.safetyButton = new QMNestedButton(mainTab.menuTransform, "Safety");
+            Main.Instance.rendererButton = new QMNestedButton(mainTab.menuTransform, "Renderer");
+            Main.Instance.botButton = new QMNestedButton(mainTab.menuTransform, "Bot");
+            Main.Instance.settingsButton = new QMNestedButton(mainTab.menuTransform, "Settings");
 
             Main.Instance.modules.Add(new Fly());
 
@@ -133,7 +133,7 @@ namespace EvilEye
             foreach (BaseModule module in Main.Instance.modules)
                 module.OnUIInit();
 
-            new QMSingleButton(Main.Instance.quickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions").transform, "VRCA", "Download Users VRCA", Main.Instance.quickMenuStuff.Button_AvatarsIcon.sprite, delegate
+            new QMSingleButton(Main.Instance.quickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions").transform, "VRCA", "Download Users VRCA", null, delegate
             {
                 ApiAvatar avatar = PlayerWrapper.GetByUsrID(Main.Instance.quickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_ApiAvatar_0;
                 WebClient webClient = new WebClient
@@ -147,7 +147,7 @@ namespace EvilEye
                 LoggerUtill.Log("Downloaded Selected User VRCA Completed");
             });
 
-            new QMSingleButton(Main.Instance.quickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions").transform, "ForceClone", "ForceClone", Main.Instance.quickMenuStuff.Button_AvatarsIcon.sprite, delegate
+            new QMSingleButton(Main.Instance.quickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions").transform, "ForceClone", "ForceClone", null, delegate
             {
                 ApiAvatar avatar = PlayerWrapper.GetByUsrID(Main.Instance.quickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_ApiAvatar_0;
                 if (avatar.releaseStatus == "public")

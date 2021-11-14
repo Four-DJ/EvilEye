@@ -15,7 +15,7 @@ namespace EvilEye.SDK.ButtonAPI
         public QMMenu menu;
         public Transform menuTransform;
 
-        public QMNestedButton(Transform perant, string name, Sprite icon)
+        public QMNestedButton(Transform perant, string name, Sprite icon = null)
         {
             menu = new QMMenu(name, name, false, true);
             menuTransform = menu.menuContents;

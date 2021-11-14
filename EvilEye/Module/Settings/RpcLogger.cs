@@ -13,7 +13,7 @@ namespace EvilEye.Module.Settings
 {
     class RpcLogger : BaseModule, OnRPCEvent
     {
-        public RpcLogger() : base("RPCLogger", "Logs RPCs", Main.Instance.settingsButton, Main.Instance.quickMenuStuff.Button_RespawnIcon.sprite, true, true)
+        public RpcLogger() : base("RPCLogger", "Logs RPCs", Main.Instance.settingsButton, null, true, true)
         {
         }
 

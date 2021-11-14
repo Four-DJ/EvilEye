@@ -10,7 +10,7 @@ namespace EvilEye.Module.World
 {
     class CopyID : BaseModule
     {
-        public CopyID() : base("CopyID","Copy the InstanceID", Main.Instance.worldButton, Main.Instance.quickMenuStuff.Button_WorldsIcon.sprite) { }
+        public CopyID() : base("CopyID","Copy the InstanceID", Main.Instance.worldButton, null) { }
 
         public override void OnEnable()
         {

@@ -14,7 +14,7 @@ namespace EvilEye.Module.Safety
 {
     class RateLimit : BaseModule, OnEventEvent, OnRPCEvent
     {
-        public RateLimit() : base("RateLimit", "Anti for EventSpamm related Exploits", Main.Instance.safetyButton, Main.Instance.quickMenuStuff.Button_SafetyIcon.sprite, true, true)
+        public RateLimit() : base("RateLimit", "Anti for EventSpamm related Exploits", Main.Instance.safetyButton, null, true, true)
         {
         }
 

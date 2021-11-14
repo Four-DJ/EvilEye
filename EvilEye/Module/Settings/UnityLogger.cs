@@ -11,7 +11,7 @@ namespace EvilEye.Module.Settings
     {
         public static UnityLogger Instance;
 
-        public UnityLogger() : base("UnityLogger", "Logs Unity Debug", Main.Instance.settingsButton, Main.Instance.quickMenuStuff.Button_RespawnIcon.sprite, true, true)
+        public UnityLogger() : base("UnityLogger", "Logs Unity Debug", Main.Instance.settingsButton, null, true, true)
         {
             Instance = this;
         }

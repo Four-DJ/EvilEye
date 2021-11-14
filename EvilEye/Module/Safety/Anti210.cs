@@ -14,7 +14,7 @@ namespace EvilEye.Module.Safety
 {
     class Anti210 : BaseModule, OnEventEvent
     {
-        public Anti210() : base ("Event210", "Anti for the Event210 Exploit", Main.Instance.safetyButton, Main.Instance.quickMenuStuff.Button_SafetyIcon.sprite, true, true)
+        public Anti210() : base ("Event210", "Anti for the Event210 Exploit", Main.Instance.safetyButton, null, true, true)
         {
         }
 

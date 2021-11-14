@@ -14,7 +14,7 @@ namespace EvilEye.Module.Settings
 {
     class EventLogger : BaseModule, OnEventEvent
     {
-        public EventLogger() : base("EventLogger", "Logs Photon Events", Main.Instance.settingsButton, Main.Instance.quickMenuStuff.Button_RespawnIcon.sprite, true, true)
+        public EventLogger() : base("EventLogger", "Logs Photon Events", Main.Instance.settingsButton, null, true, true)
         {
         }
 

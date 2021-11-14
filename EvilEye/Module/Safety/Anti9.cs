@@ -13,7 +13,7 @@ namespace EvilEye.Module.Safety
 {
     class Anti9 : BaseModule, OnEventEvent
     {
-        public Anti9() : base("Event9", "Anti for the Event9 Exploit", Main.Instance.safetyButton, Main.Instance.quickMenuStuff.Button_SafetyIcon.sprite, true, true)
+        public Anti9() : base("Event9", "Anti for the Event9 Exploit", Main.Instance.safetyButton, null, true, true)
         {
         }
 

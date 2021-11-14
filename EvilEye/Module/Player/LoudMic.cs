@@ -9,7 +9,7 @@ namespace EvilEye.Module.Player
 {
     class LoudMic : BaseModule
     {
-        public LoudMic() : base("LoudMic", "Microphone Go Brrrr", Main.Instance.playerButton, Main.Instance.quickMenuStuff.Button_AvatarsIcon.sprite, true) { }
+        public LoudMic() : base("LoudMic", "Microphone Go Brrrr", Main.Instance.playerButton, null, true) { }
 
         public override void OnEnable()
         {

@@ -15,7 +15,7 @@ namespace EvilEye.Module.Settings
 {
     class OPSendLogger : BaseModule, OnSendOPEvent
     {
-        public OPSendLogger() : base("OPSendLogger", "Logs Photon Events Send by you", Main.Instance.settingsButton, Main.Instance.quickMenuStuff.Button_RespawnIcon.sprite, true, true)
+        public OPSendLogger() : base("OPSendLogger", "Logs Photon Events Send by you", Main.Instance.settingsButton, null, true, true)
         {
         }
 
