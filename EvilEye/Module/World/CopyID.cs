@@ -14,7 +14,20 @@ namespace EvilEye.Module.World
 
         public override void OnEnable()
         {
-
-        }
-    }
+			SetClipboard(RoomManager.field_Internal_Static_ApiWorldInstance_0.instanceId);
+		}
+		internal static void SetClipboard(string Set)
+		{
+			bool flag = Clipboard.ContainsText();
+			if (flag)
+			{
+				Clipboard.Clear();
+				Clipboard.SetText(Set);
+			}
+			else
+			{
+				Clipboard.SetText(Set);
+			}
+		}
+	}
 }

@@ -103,6 +103,8 @@ namespace EvilEye
 
             Main.Instance.modules.Add(new Fly());
 
+            Main.Instance.modules.Add(new AviToID());
+            Main.Instance.modules.Add(new FPSUnlocker());
             Main.Instance.modules.Add(new XBoxMic());
             Main.Instance.modules.Add(new LoudMic());
             Main.Instance.modules.Add(new HeadFlipper());
@@ -117,7 +119,7 @@ namespace EvilEye
 
             Main.Instance.modules.Add(new RateLimit());
             Main.Instance.modules.Add(new Anti9());
-            //Main.Instance.modules.Add(new Anti7());
+            Main.Instance.modules.Add(new Anti7());
             Main.Instance.modules.Add(new Anti209());
             Main.Instance.modules.Add(new Anti210());
 
@@ -128,6 +130,7 @@ namespace EvilEye
 
             Main.Instance.modules.Add(new CapsuleEsp());
 
+            Main.Instance.modules.Add(new JoinByID());
             Main.Instance.modules.Add(new Rejoin());
             Main.Instance.modules.Add(new CopyID());
 

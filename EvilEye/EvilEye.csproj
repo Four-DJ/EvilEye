@@ -48,6 +48,8 @@
     <Compile Include="Module\Exploit\VRCA.cs" />
     <Compile Include="Module\Exploit\VRCW.cs" />
     <Compile Include="Module\Movement\Fly.cs" />
+    <Compile Include="Module\Player\AviToID.cs" />
+    <Compile Include="Module\Player\FPSUnlocker.cs" />
     <Compile Include="Module\Render\CapsuleESP.cs" />
     <Compile Include="Module\Player\HeadFlipper.cs" />
     <Compile Include="Module\Player\LoudMic.cs" />
@@ -63,6 +65,7 @@
     <Compile Include="Module\Settings\RpcLogger.cs" />
     <Compile Include="Module\Settings\UnityLogger.cs" />
     <Compile Include="Module\World\CopyID.cs" />
+    <Compile Include="Module\World\JoinByID.cs" />
     <Compile Include="Module\World\Rejoin.cs" />
     <Compile Include="Patches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

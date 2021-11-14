@@ -6,8 +6,18 @@ using System.Threading.Tasks;
 
 namespace EvilEye.Module.Settings
 {
-    class JoinLogger
+    class JoinLogger : BaseModule
     {
-        //will work on this later
+        public JoinLogger() : base("Join/Leave Log", "Logs Players Joining And Leaving", Main.Instance.settingsButton, null, true, true)
+        {
+        }
+
+        public override void OnEnable()
+        { 
+        }
+
+        public override void OnDisable()
+        { 
+        }
     }
 }
