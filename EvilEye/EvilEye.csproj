@@ -48,6 +48,7 @@
     <Compile Include="Module\Exploit\VRCA.cs" />
     <Compile Include="Module\Exploit\VRCW.cs" />
     <Compile Include="Module\Movement\Fly.cs" />
+    <Compile Include="Module\Render\CapsuleESP.cs" />
     <Compile Include="Module\Player\HeadFlipper.cs" />
     <Compile Include="Module\Player\LoudMic.cs" />
     <Compile Include="Module\Player\XBoxMic.cs" />

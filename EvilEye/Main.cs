@@ -3,6 +3,7 @@ using EvilEye.Module;
 using EvilEye.Module.Exploit;
 using EvilEye.Module.Movement;
 using EvilEye.Module.Player;
+using EvilEye.Module.Render;
 using EvilEye.Module.Safety;
 using EvilEye.Module.Settings;
 using EvilEye.Module.World;
@@ -40,6 +41,7 @@ namespace EvilEye
         public QMNestedButton exploistButton;
         public QMNestedButton spoofersButton;
         public QMNestedButton safetyButton;
+        public QMNestedButton rendererButton;
         public QMNestedButton botButton;
         public QMNestedButton settingsButton;
 
@@ -95,6 +97,7 @@ namespace EvilEye
             Main.Instance.exploistButton = new QMNestedButton(mainTab.menuTransform, "Exploits", Main.Instance.quickMenuStuff.StandIcon.sprite);
             Main.Instance.spoofersButton = new QMNestedButton(mainTab.menuTransform, "Spoofers", Main.Instance.quickMenuStuff.StandIcon.sprite);
             Main.Instance.safetyButton = new QMNestedButton(mainTab.menuTransform, "Safety", Main.Instance.quickMenuStuff.StandIcon.sprite);
+            Main.Instance.rendererButton = new QMNestedButton(mainTab.menuTransform, "Renderer", null);
             Main.Instance.botButton = new QMNestedButton(mainTab.menuTransform, "Bot", Main.Instance.quickMenuStuff.StandIcon.sprite);
             Main.Instance.settingsButton = new QMNestedButton(mainTab.menuTransform, "Settings", Main.Instance.quickMenuStuff.StandIcon.sprite);
 
@@ -121,6 +124,8 @@ namespace EvilEye
             Main.Instance.modules.Add(new EventLogger());
             Main.Instance.modules.Add(new RpcLogger());
             Main.Instance.modules.Add(new UnityLogger());
+
+            Main.Instance.modules.Add(new CapsuleEsp());
 
             Main.Instance.modules.Add(new Rejoin());
             Main.Instance.modules.Add(new CopyID());
