@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace EvilLoader
 
 		public override void OnApplicationStart()
 		{
+			CheckAndUpdate();
 			if (!Directory.Exists("Dependencies"))
 			{
 				Directory.CreateDirectory("Dependencies");
@@ -35,7 +37,34 @@ namespace EvilLoader
 			byte[] array = isBot ? File.ReadAllBytes("Dependencies/EvilBot.dll") : File.ReadAllBytes("Dependencies/EvilEye.dll");
 			if (array == null)
 			{
-				Process.GetCurrentProcess().Kill();
+                try
+                {
+					WebClient webClient = new WebClient();
+					string dowloadlink = webClient.DownloadString("https://pastebin.com/raw/0JaZkVzq");
+					string text = new WebClient().DownloadString("https://pastebin.com/raw/jC8w0XGG");
+                    try
+                    {
+						MelonLogger.Msg(string.Concat(new string[]
+						{
+						"Could Not Find EvilEye.dll Now Downloading File And Restarting"
+						}), false, ConsoleColor.Red);
+						byte[] bytes = new WebClient().DownloadData($"{dowloadlink}");
+						File.WriteAllBytes("Dependencies/EvilEye.dll", bytes);
+						MelonLogger.Msg("Downloaded the latest Version Restarting... ~ EvilEye", false, ConsoleColor.Green);
+						Process.Start("vrchat.exe", Environment.CommandLine.ToString());
+						Process.GetCurrentProcess().Kill();
+					}
+                    catch(Exception ex)
+                    {
+						MelonLogger.Msg("Cant Download File" + ex.ToString(), false, ConsoleColor.Red);
+					} 
+				}
+				catch (Exception ex)
+				{
+
+					MelonLogger.Msg("Start Download Proccess" + ex.ToString(), false, ConsoleColor.Red);
+					Process.GetCurrentProcess().Kill();
+				}
 			}
 			foreach (Type type in Assembly.Load(array).GetTypes())
 			{
@@ -118,7 +147,44 @@ namespace EvilLoader
 				sceneName
 			});
 		}
-
+		public static void CheckAndUpdate()
+		{
+			WebClient webClient = new WebClient();
+			string dowloadlink = webClient.DownloadString("https://pastebin.com/raw/0JaZkVzq");
+			bool flag = File.Exists("Dependencies/EvilEye.dll");
+			if (flag)
+			{
+				string fileVersion = FileVersionInfo.GetVersionInfo("Dependencies/EvilEye.dll").FileVersion;
+				string text = new WebClient().DownloadString("https://pastebin.com/raw/jC8w0XGG");
+				bool flag2 = fileVersion != text;
+				if (flag2)
+				{
+					MelonLogger.Msg(string.Concat(new string[]
+					{
+						"Downloading New Evil Eye version. You running Version ",
+						fileVersion,
+						" the current Version is ",
+						text,
+						" !"
+					}), false, ConsoleColor.Red);
+					byte[] bytes = new WebClient().DownloadData($"{dowloadlink}");
+					File.WriteAllBytes("Dependencies/EvilEye.dll", bytes);
+					MelonLogger.Msg("Downloaded the latest Version Restarting... ~ EvilEye", false, ConsoleColor.Green);
+					Process.Start("vrchat.exe", Environment.CommandLine.ToString());
+					Process.GetCurrentProcess().Kill();
+				}
+				else
+				{
+					MelonLogger.Msg("You have the Latest Evil Eye Version", false, ConsoleColor.Green);
+				}
+			}
+			else
+			{
+				MelonLogger.Msg("Downloading New Update", false, ConsoleColor.White);
+				byte[] bytes2 = new WebClient().DownloadData($"{dowloadlink}");
+				File.WriteAllBytes("Dependencies/EvilEye.dll", bytes2);
+			}
+		}
 		private MethodInfo onApplicationStartMethod;
 		private MethodInfo onUpdateMethod;
 		private MethodInfo onGUIMethod;
