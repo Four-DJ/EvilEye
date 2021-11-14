@@ -117,7 +117,7 @@ namespace EvilEye
 
             Main.Instance.modules.Add(new RateLimit());
             Main.Instance.modules.Add(new Anti9());
-            Main.Instance.modules.Add(new Anti7());
+            //Main.Instance.modules.Add(new Anti7());
             Main.Instance.modules.Add(new Anti209());
             Main.Instance.modules.Add(new Anti210());
 

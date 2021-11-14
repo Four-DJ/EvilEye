@@ -31,12 +31,13 @@ namespace EvilEye.Module.Safety
             if (eventData.Code == 7)
             {
                 var bytes = eventData.CustomData.Cast<Il2CppArrayBase<byte>>();
-                if (bytes.Length > 300)
-                    return false;
+                if (bytes.Length > 300) 
+                { 
+                    return false; 
+                }
 
                 return false;
             }
-
             return true;
         }
     }

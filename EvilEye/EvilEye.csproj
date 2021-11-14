@@ -58,6 +58,7 @@
     <Compile Include="Module\Safety\Anti9.cs" />
     <Compile Include="Module\Safety\RateLimit.cs" />
     <Compile Include="Module\Settings\EventLogger.cs" />
+    <Compile Include="Module\Settings\JoinLogger.cs" />
     <Compile Include="Module\Settings\OPSendLogger.cs" />
     <Compile Include="Module\Settings\RpcLogger.cs" />
     <Compile Include="Module\Settings\UnityLogger.cs" />

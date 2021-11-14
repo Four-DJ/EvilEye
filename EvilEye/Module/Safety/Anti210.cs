@@ -30,7 +30,8 @@ namespace EvilEye.Module.Safety
 
         public bool OnEvent(EventData eventData)
         {
-            if (eventData.Code == 210) {
+            if (eventData.Code == 210) 
+            {
                 VRC.Player player = PlayerWrapper.GetPlayerWithPlayerID(eventData.sender);
                 if(player == null)
                 {
