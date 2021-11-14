@@ -14,10 +14,13 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using VRC;
+using VRC.Core;
 using Transmtn;
 using UnityEngine;
 using UnityEngine.Networking;
 using VRC.SDKBase;
+using MelonLoader;
 
 namespace EvilEye
 {
@@ -25,6 +28,14 @@ namespace EvilEye
     {
         private static readonly HarmonyLib.Harmony Instance = new HarmonyLib.Harmony("EvilEye");
         private static string newHWID = "";
+        public static event Action<VRC.Player> OnPlayerJoined;
+        public static event Action<VRC.Player> OnPlayerLeft;
+        public static event Action<VRC.Player> OnLocalPlayerJoined;
+        public static event Action<VRC.Player> OnLocalPlayerLeft;
+        public static event Action<VRCPlayer> OnVRCPlayerAwoke;
+        public static event Action<VRCPlayer> OnVRCPlayerDestroyed;
+        public static event Action<VRCPlayer, ApiAvatar, GameObject> OnAvatarInstantiated;
+        public static event Action<ApiWorld, ApiWorldInstance> OnInstanceChanged;
 
         public static void Init()
         {
@@ -40,7 +51,18 @@ namespace EvilEye
             {
                 LoggerUtill.Log("[Patches] Could not patch Analystics failed\n" + ex, ConsoleColor.Red);
             }
-
+            try
+            {
+                VRCEventDelegate<VRC.Player> field_Internal_VRCEventDelegate_1_Player_ = NetworkManager.field_Internal_Static_NetworkManager_0.field_Internal_VRCEventDelegate_1_Player_0;
+                VRCEventDelegate<VRC.Player> field_Internal_VRCEventDelegate_1_Player_2 = NetworkManager.field_Internal_Static_NetworkManager_0.field_Internal_VRCEventDelegate_1_Player_1;
+                field_Internal_VRCEventDelegate_1_Player_.field_Private_HashSet_1_UnityAction_1_T_0.Add(new Action<VRC.Player>(Patches.OnPlayerJoin));
+                field_Internal_VRCEventDelegate_1_Player_2.field_Private_HashSet_1_UnityAction_1_T_0.Add(new Action<VRC.Player>(Patches.OnPlayerLeave));
+                LoggerUtill.Log("[Patches] Patched Player Rules", ConsoleColor.Green);
+            }
+            catch (Exception ex)
+            {
+                LoggerUtill.Log("[Patches] Could not patch Player Rules failed\n" + ex, ConsoleColor.Red);
+            }
             try
             {
                 Instance.Patch(typeof(LoadBalancingClient).GetMethod("OnEvent"), new HarmonyMethod(AccessTools.Method(typeof(Patches), nameof(OnEvent))));
@@ -79,44 +101,82 @@ namespace EvilEye
             {
                 Thread.Sleep(25);
             }
+
+            LoggerUtill.Log("[Patch] All Patching Procedures Are Complete, Now Starting Client", ConsoleColor.Green);
+        }
+        private static void OnPlayerJoin(VRC.Player player)
+        {
+            if (player == null)
+            {
+                return;
+            }
+            LoggerUtill.Log("OnPlayerJoin: " + player.ToString());
             try
             {
-                NetworkManager
-                    .field_Internal_Static_NetworkManager_0
-                    .field_Internal_VRCEventDelegate_1_Player_0
-                    .field_Private_HashSet_1_UnityAction_1_T_0
-                    .Add(new Action<VRC.Player>(player => OnPlayerJoined(ref player)));
-                LoggerUtill.Log("[Patches] Patched PlayerJoin", ConsoleColor.Green);
+                if (player.field_Private_APIUser_0 == null || player.field_Private_APIUser_0.IsSelf)
+                {
+                    Action<VRC.Player> onLocalPlayerJoined = Patches.OnLocalPlayerJoined;
+                    if (onLocalPlayerJoined != null)
+                    {
+                        onLocalPlayerJoined.DelegateSafeInvoke(new object[]
+                        {
+                            player
+                        });
+                    }
+                }
+                else
+                {
+                    Action<VRC.Player> onPlayerJoined = Patches.OnPlayerJoined;
+                    if (onPlayerJoined != null)
+                    {
+                        onPlayerJoined.DelegateSafeInvoke(new object[]
+                        {
+                            player
+                        });
+                    }
+                }
             }
-            catch { LoggerUtill.Log("[Patches] Could not patch PlayerJoin", ConsoleColor.Red); }
-
+            catch (Exception ex)
+            {
+                LoggerUtill.Log("Error while executing OnPlayerJoin:\n" + ex.ToString());
+            }
+        }
+        private static void OnPlayerLeave(VRC.Player player)
+        {
+            if (player == null)
+            {
+                return;
+            }
+            LoggerUtill.Log("OnPlayerLeave: " + player.ToString());
             try
             {
-                NetworkManager
-                    .field_Internal_Static_NetworkManager_0
-                    .field_Internal_VRCEventDelegate_1_Player_1
-                    .field_Private_HashSet_1_UnityAction_1_T_0
-                    .Add(new Action<VRC.Player>(player => OnPlayerLeft(ref player)));
-                LoggerUtill.Log("[Patches] Patched OnPlayerLeft", ConsoleColor.Green);
+                if (player.field_Private_APIUser_0 == null || player.field_Private_APIUser_0.IsSelf)
+                {
+                    Action<VRC.Player> onLocalPlayerLeft = Patches.OnLocalPlayerLeft;
+                    if (onLocalPlayerLeft != null)
+                    {
+                        onLocalPlayerLeft.DelegateSafeInvoke(new object[]
+                        {
+                            player
+                        });
+                    }
+                }
+                else
+                {
+                    Action<VRC.Player> onPlayerLeft = Patches.OnPlayerLeft;
+                    if (onPlayerLeft != null)
+                    {
+                        onPlayerLeft.DelegateSafeInvoke(new object[]
+                        {
+                            player
+                        });
+                    }
+                }
             }
-            catch { LoggerUtill.Log("[Patches] Could not patch PlayerLeave", ConsoleColor.Red); }
-            LoggerUtill.Log("[Patch] Done", ConsoleColor.Green);
-        }
-
-        private static void OnPlayerJoined(ref VRC.Player __0)
-        {
-            if(VRC.Player.prop_Player_0 == __0)
-                WorldWrapper.Init();
-            CustomNameplate nameplate = __0.transform.Find("Player Nameplate/Canvas/Nameplate").gameObject.AddComponent<CustomNameplate>();
-            nameplate.player = __0;
-            foreach (OnPlayerJoinEvent wdEvent in Main.Instance.onPlayerJoinEvents)
-                wdEvent.OnPlayerJoin(__0);
-        }
-
-        private static void OnPlayerLeft(ref VRC.Player __0)
-        {
-            foreach (OnPlayerLeaveEvent wdEvent in Main.Instance.onPlayerLeaveEvents)
-                wdEvent.PlayerLeave(__0);
+            catch (Exception ex)
+            {
+                LoggerUtill.Log("Error while executing OnPlayerLeave:\n" + ex.ToString());
+            }
         }
 
         [Obfuscation(Exclude = true)]

@@ -67,7 +67,21 @@ namespace EvilEye.SDK
         {
             Instance._player.SetHide(State);
         }
-
+        public static void DelegateSafeInvoke(this Delegate @delegate, params object[] args)
+        {
+            Delegate[] invocationList = @delegate.GetInvocationList();
+            for (int i = 0; i < invocationList.Length; i++)
+            {
+                try
+                {
+                    invocationList[i].DynamicInvoke(args);
+                }
+                catch (Exception ex)
+                {
+                    LoggerUtill.Log("Error while executing delegate:\n" + ex.ToString());
+                }
+            }
+        }
         public static void SetHide(this Player Instance, bool State)
         {
             Instance.transform.Find("ForwardDirection").gameObject.active = !State;
