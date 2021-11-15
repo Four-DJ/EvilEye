@@ -45,6 +45,14 @@ namespace EvilEye.SDK
         {
             return player.prop_APIUser_0;
         }
+        
+        public static VRCPlayer LocalVRCPlayer
+        {
+            get
+            {
+                return VRCPlayer.field_Internal_Static_VRCPlayer_0;
+            }
+        }
 
         public static string GetFrames(this Player player)
         {
