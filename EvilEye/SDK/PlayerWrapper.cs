@@ -16,6 +16,8 @@ namespace EvilEye.SDK
     {
         public static Player[] GetAllPlayers() { return PlayerManager.prop_PlayerManager_0.prop_ArrayOf_Player_0; }
       
+        public static void Teleport(this Player player) => LocalVRCPlayer.transform.position = player.prop_VRCPlayer_0.transform.position;
+
         public static string GetUserID => GetAPIUser(LocalPlayer).id; 
         
         public static Player GetByUsrID(string usrID)
