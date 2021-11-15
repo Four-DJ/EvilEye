@@ -17,7 +17,7 @@ namespace EvilEye.Module.World
         {
            if(WorldWrapper.GetWorldID != "")
                 Misc.SetClipboard(WorldWrapper.GetWorldID);
-	        LoggerUtill.Log("World ID: " + WorldWrapper.GetWorldID + "Copied to clipboard.", ConsoleColor.Green);
+	        LoggerUtill.Log("World ID: " + WorldWrapper.GetWorldID + " copied to clipboard.", ConsoleColor.Green);
         }
  
 	}
