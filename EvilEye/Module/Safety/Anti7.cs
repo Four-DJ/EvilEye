@@ -1,20 +1,17 @@
-﻿using EvilEye.Events;
-using EvilEye.SDK;
-using EvilEye.SDK.ButtonAPI;
-using EvilEye.SDK.Photon;
-using ExitGames.Client.Photon;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EvilEye.Events;
+using ExitGames.Client.Photon;
 using UnhollowerBaseLib;
 
 namespace EvilEye.Module.Safety
 {
-    class FreezePlayer : BaseModule, OnEventEvent
+    class Anti7 : BaseModule, OnEventEvent
     {
-        public FreezePlayer() : base("Freeze Players", "Freezes Player Locally For selection", Main.Instance.exploistButton, null, true, true)
+        public Anti7() : base("Freeze Players", "Freezes Player Locally For selection", Main.Instance.exploistButton, null, true, true)
         {
         }
         public override void OnEnable()
@@ -30,7 +27,12 @@ namespace EvilEye.Module.Safety
         {
             if (eventData.Code == 7)
             {
-                return false;
+                var bytes = eventData.CustomData.Cast<Il2CppArrayBase<byte>>();
+                if (bytes.Length > 300)
+                {
+                    return false;
+                }
+                return true;
             }
             return true;
         }

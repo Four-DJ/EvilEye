@@ -115,6 +115,7 @@ namespace EvilEye
             Main.Instance.modules.Add(new Event210());
             Main.Instance.modules.Add(new AssetBundleCrash());
             Main.Instance.modules.Add(new QuestCrash());
+            Main.Instance.modules.Add(new FreezePlayer());
             Main.Instance.modules.Add(new VRCA());
             Main.Instance.modules.Add(new VRCW());
 

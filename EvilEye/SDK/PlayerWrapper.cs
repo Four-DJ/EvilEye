@@ -45,8 +45,6 @@ namespace EvilEye.SDK
         {
             return player.prop_APIUser_0;
         }
-        
-       
 
         public static string GetFrames(this Player player)
         {
