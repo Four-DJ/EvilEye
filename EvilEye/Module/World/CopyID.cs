@@ -1,4 +1,4 @@
-using EvilEye.SDK.ButtonAPI;
+using EvilEye.SDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +11,13 @@ namespace EvilEye.Module.World
 {
     class CopyID : BaseModule
     {
-        public CopyID() : base("CopyID","Copy the InstanceID", Main.Instance.worldButton, null) { }
-   
+        public CopyID() : base("CopyID", "Copy the InstanceID", Main.Instance.worldButton, null) { }
+
         public override void OnEnable()
         {
-            SDK.Misc.SetClipboard(SDK.PlayerWrapper.GetAPIUser(SDK.PlayerWrapper.LocalPlayer).location);
+           if(PlayerWrapper.GetWorldID != "")
+                Misc.SetClipboard(PlayerWrapper.GetWorldID);
         }
-		
-    }
+ 
+	}
 }
