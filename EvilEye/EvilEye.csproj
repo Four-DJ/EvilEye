@@ -44,6 +44,7 @@
     <Compile Include="Module\Exploit\Event209.cs" />
     <Compile Include="Module\Exploit\Event210.cs" />
     <Compile Include="Module\Exploit\Event9.cs" />
+    <Compile Include="Module\Exploit\FreezePlayer.cs" />
     <Compile Include="Module\Exploit\QuestCrash.cs" />
     <Compile Include="Module\Exploit\VRCA.cs" />
     <Compile Include="Module\Exploit\VRCW.cs" />
@@ -57,7 +58,6 @@
     <Compile Include="Module\Player\XBoxMic.cs" />
     <Compile Include="Module\Safety\Anti209.cs" />
     <Compile Include="Module\Safety\Anti210.cs" />
-    <Compile Include="Module\Safety\Anti7.cs" />
     <Compile Include="Module\Safety\Anti9.cs" />
     <Compile Include="Module\Safety\RateLimit.cs" />
     <Compile Include="Module\Settings\EventLogger.cs" />
