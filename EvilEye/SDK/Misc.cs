@@ -19,5 +19,19 @@ namespace EvilEye.SDK
             }
             return s;
         }
+        
+        internal static void SetClipboard(string Set) //good shit fishyboi
+        {
+            bool flag = Clipboard.ContainsText();
+            if (flag)
+            {
+                Clipboard.Clear();
+                Clipboard.SetText(Set);
+            }
+            else
+            {
+                Clipboard.SetText(Set);
+            }
+        }
     }
 }
