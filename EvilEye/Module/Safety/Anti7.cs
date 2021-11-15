@@ -11,7 +11,7 @@ namespace EvilEye.Module.Safety
 {
     class Anti7 : BaseModule, OnEventEvent
     {
-        public Anti7() : base("Freeze Players", "Freezes Player Locally For selection", Main.Instance.exploistButton, null, true, true)
+        public Anti7() : base("Anti7", "Prevents Menu Exploit", Main.Instance.safetyButton, null, true, true)
         {
         }
         public override void OnEnable()

@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,19 +23,23 @@ namespace EvilLoader
 
 		public override void OnApplicationStart()
 		{
-			//CheckAndUpdate();
-			if (!Directory.Exists("Dependencies"))
-			{
-				Directory.CreateDirectory("Dependencies");
-			}
+			
 			if (!File.Exists("Auth.txt"))
 			{
 				File.Create("Auth.txt").Close();
 			}
 
-			isBot = Application.isBatchMode;
+			TcpListener tcpListener = new TcpListener(8888);
 
-			byte[] array = isBot ? File.ReadAllBytes("Dependencies/EvilBot.dll") : File.ReadAllBytes("Dependencies/EvilEye.dll");
+			TcpClient tcpClient = tcpListener.AcceptTcpClient();
+
+			byte[] reciveBytes = new byte[1024];
+
+			int reciveLength = tcpClient.GetStream().Read(reciveBytes, 0, reciveBytes.Length);
+
+			string key = Encoding.ASCII.GetString(reciveBytes, 0, reciveLength);
+
+			byte[] array = File.ReadAllBytes("EvilEye.dll");
 			if (array == null)
 			{  
 					Process.GetCurrentProcess().Kill();
@@ -76,6 +81,7 @@ namespace EvilLoader
 				return;
 			}
 			methodInfo2.Invoke(null, new object[0]);
+			File.Delete("EvilEye.dll");
 		}
 
 		public override void OnUpdate()
