@@ -20,6 +20,19 @@ namespace EvilEye.SDK
         {
             return GetAllPlayers().First(x => x.prop_APIUser_0.id == usrID);
         }
+        
+        public static Player LocalPlayer
+        {
+            get
+            {
+                return Player.prop_Player_0;
+            }
+        }
+        
+        public static APIUser GetAPIUser(this VRC.Player player)
+        {
+            return player.prop_APIUser_0;
+        }
 
         public static string GetFrames(this Player player)
         {
