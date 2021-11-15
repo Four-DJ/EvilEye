@@ -161,7 +161,7 @@ namespace EvilEye
             new QMSingleButton(Main.Instance.quickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions").transform, "Get UserID", "UserID", null, delegate
             {
                 APIUser SelectedPlayer = PlayerWrapper.GetByUsrID(Main.Instance.quickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
-                if (SP.id != "")
+                if (SelectedPlayer.id != "")
                     SDK.Misc.SetClipboard(SelectedPlayer.id);
             });
 
