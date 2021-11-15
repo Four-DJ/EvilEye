@@ -1,8 +1,10 @@
-﻿using MelonLoader;
+﻿using Encyryption;
+using MelonLoader;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -29,6 +31,8 @@ namespace EvilLoader
 				File.Create("Auth.txt").Close();
 			}
 
+			Process.Start("EvilEyeAuth.exe", "48ec5a237aeff6fb6daab2e2bb1517952957c320390831f342ef04af80f748f3");
+
 			TcpListener tcpListener = new TcpListener(8888);
 
 			TcpClient tcpClient = tcpListener.AcceptTcpClient();
@@ -39,11 +43,19 @@ namespace EvilLoader
 
 			string key = Encoding.ASCII.GetString(reciveBytes, 0, reciveLength);
 
-			byte[] array = File.ReadAllBytes("EvilEye.dll");
+			byte[] encrypted = File.ReadAllBytes("EvilEye.dll");
+			byte[] compressed = Convert.FromBase64String(StringCipher.Decrypt(Encoding.UTF8.GetString(encrypted, 0, encrypted.Length), key));
+
+			MemoryStream from = new MemoryStream(compressed);
+			MemoryStream to = new MemoryStream();
+			GZipStream gZipStream = new GZipStream(from, CompressionMode.Decompress);
+			gZipStream.CopyTo(to);
+
+			byte[] array = to.ToArray();
+			tcpClient.Close();
 			if (array == null)
 			{  
 					Process.GetCurrentProcess().Kill();
-				 
 			}
 			foreach (Type type in Assembly.Load(array).GetTypes())
 			{
