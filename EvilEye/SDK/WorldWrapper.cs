@@ -13,7 +13,9 @@ namespace EvilEye.SDK
     {
         public static VRC_Pickup[] vrc_Pickups;
         public static PhotonView[] photonViews;
-
+       
+        public static string GetWorldID => GetAPIUser(LocalPlayer).location; //four expression body https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/expression-bodied-members
+       
         public static void Init()
         {
             vrc_Pickups = UnityEngine.Object.FindObjectsOfType<VRC_Pickup>();
