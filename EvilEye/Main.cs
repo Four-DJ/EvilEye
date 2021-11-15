@@ -166,7 +166,13 @@ namespace EvilEye
                     SDK.Misc.SetClipboard(SelectedPlayer.id);
             });
 
-
+            new QMSingleButton(Main.Instance.quickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions").transform, "Teleport", "Teleport to selected user.", null, delegate
+            {
+             
+                    PlayerWrapper.Teleport(PlayerWrapper.GetByUsrID(Main.Instance.quickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0));
+                    
+            });
+            
             LoggerUtill.Log("[UI] Done", ConsoleColor.Green);
         }
 
