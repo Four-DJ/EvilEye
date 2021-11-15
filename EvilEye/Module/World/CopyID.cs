@@ -14,7 +14,7 @@ namespace EvilEye.Module.World
 
         public override void OnEnable()
         {
-			SetClipboard(RoomManager.field_Internal_Static_ApiWorldInstance_0.instanceId);
+			SetClipboard(SDK.PlayerWrapper.GetAPIUser(SDK.PlayerWrapper.LocalPlayer).location);
 		}
 		internal static void SetClipboard(string Set)
 		{
