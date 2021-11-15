@@ -15,8 +15,9 @@ namespace EvilEye.Module.World
 
         public override void OnEnable()
         {
-           if(PlayerWrapper.GetWorldID != "")
-                Misc.SetClipboard(PlayerWrapper.GetWorldID);
+           if(WorldWrapper.GetWorldID != "")
+                Misc.SetClipboard(WorldWrapper.GetWorldID);
+	        LoggerUtill.Log("World ID: " + WorldWrapper.GetWorldID + "Copied to clipboard.", ConsoleColor.Green);
         }
  
 	}
