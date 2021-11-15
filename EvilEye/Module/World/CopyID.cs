@@ -9,7 +9,7 @@ using VRC.Core;
 
 namespace EvilEye.Module.World
 {
-    class CopyID : BaseModule
+    class CopyWID : BaseModule
     {
         public CopyID() : base("Get World ID", "Copy the World + InstanceID", Main.Instance.worldButton, null) { }
 
