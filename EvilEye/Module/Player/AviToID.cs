@@ -20,14 +20,14 @@ namespace EvilEye.Module.Player
             bool flag = GetClipboard().StartsWith("avtr");
             if (flag)
             {
-                avatarbyid(GetClipboard());
+                PlayerWrapper.ChangeAvatar(GetClipboard());
             }
             else
             {
                LoggerUtill.Log("ID not a Avatar", ConsoleColor.Red);
             }
         }
-        internal static string GetClipboard()
+        private string GetClipboard()
         {
             bool flag = Clipboard.ContainsText();
             string result;
@@ -40,15 +40,6 @@ namespace EvilEye.Module.Player
                 result = null;
             }
             return result;
-        }
-        internal static void avatarbyid(string AVI)
-        {
-            PageAvatar component = GameObject.Find("Screens").transform.Find("Avatar").GetComponent<PageAvatar>();
-            component.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar
-            {
-                id = AVI
-            };
-            component.ChangeToSelectedAvatar();
         }
     }
 }

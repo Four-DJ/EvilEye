@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EvilEye.Module.Settings
 {
-    class JoinLogger : BaseModule
+    class JoinLogger : BaseModule, OnPlayerJoinEvent, OnPlayerLeaveEvent
     {
         public JoinLogger() : base("Join/Leave Log", "Logs Players Joining And Leaving", Main.Instance.settingsButton, null, true, true)
         {
@@ -16,22 +16,24 @@ namespace EvilEye.Module.Settings
 
         public override void OnEnable()
         {
-           
+            Main.Instance.onPlayerJoinEvents.Add(this);
+            Main.Instance.onPlayerLeaveEvents.Add(this);
         }
 
         public override void OnDisable()
-        { 
+        {
+            Main.Instance.onPlayerJoinEvents.Remove(this);
+            Main.Instance.onPlayerLeaveEvents.Remove(this);
         }
-        //everything is added i just dont know how to link the join and leave log to this shit lol Four you can fix it its all coded and patches are done and fixed
-        public bool OnPlayerJoin(VRC.Player player)
+
+        void OnPlayerJoinEvent.OnPlayerJoin(VRC.Player player)
         {
             LoggerUtill.Log($"Player Joined ~> Username: {player.prop_APIUser_0.displayName} | Photon ID: {player.prop_VRCPlayerApi_0.playerId} | UserID: {player.prop_APIUser_0.id}");
-            return true;    
         }
-        public bool OnPlayerLeave(VRC.Player player)
+
+        public void PlayerLeave(VRC.Player player)
         {
             LoggerUtill.Log($"Player Left ~> Username: {player.prop_APIUser_0.displayName} | UserID: {player.prop_APIUser_0.id}");
-            return true;
         }
     }
 }

@@ -28,14 +28,6 @@ namespace EvilEye
     {
         private static readonly HarmonyLib.Harmony Instance = new HarmonyLib.Harmony("EvilEye");
         private static string newHWID = "";
-        public static event Action<VRC.Player> OnPlayerJoined;
-        public static event Action<VRC.Player> OnPlayerLeft;
-        public static event Action<VRC.Player> OnLocalPlayerJoined;
-        public static event Action<VRC.Player> OnLocalPlayerLeft;
-        public static event Action<VRCPlayer> OnVRCPlayerAwoke;
-        public static event Action<VRCPlayer> OnVRCPlayerDestroyed;
-        public static event Action<VRCPlayer, ApiAvatar, GameObject> OnAvatarInstantiated;
-        public static event Action<ApiWorld, ApiWorldInstance> OnInstanceChanged;
 
         public static void Init()
         {
@@ -53,10 +45,7 @@ namespace EvilEye
             }
             try
             {
-                VRCEventDelegate<VRC.Player> field_Internal_VRCEventDelegate_1_Player_ = NetworkManager.field_Internal_Static_NetworkManager_0.field_Internal_VRCEventDelegate_1_Player_0;
-                VRCEventDelegate<VRC.Player> field_Internal_VRCEventDelegate_1_Player_2 = NetworkManager.field_Internal_Static_NetworkManager_0.field_Internal_VRCEventDelegate_1_Player_1;
-                field_Internal_VRCEventDelegate_1_Player_.field_Private_HashSet_1_UnityAction_1_T_0.Add(new Action<VRC.Player>(Patches.OnPlayerJoin));
-                field_Internal_VRCEventDelegate_1_Player_2.field_Private_HashSet_1_UnityAction_1_T_0.Add(new Action<VRC.Player>(Patches.OnPlayerLeave));
+                
                 LoggerUtill.Log("[Patches] Patched Player Rules", ConsoleColor.Green);
             }
             catch (Exception ex)
@@ -102,6 +91,11 @@ namespace EvilEye
                 Thread.Sleep(25);
             }
 
+            VRCEventDelegate<VRC.Player> field_Internal_VRCEventDelegate_1_Player_ = NetworkManager.field_Internal_Static_NetworkManager_0.field_Internal_VRCEventDelegate_1_Player_0;
+            VRCEventDelegate<VRC.Player> field_Internal_VRCEventDelegate_1_Player_2 = NetworkManager.field_Internal_Static_NetworkManager_0.field_Internal_VRCEventDelegate_1_Player_1;
+            field_Internal_VRCEventDelegate_1_Player_.field_Private_HashSet_1_UnityAction_1_T_0.Add(new Action<VRC.Player>(Patches.OnPlayerJoin));
+            field_Internal_VRCEventDelegate_1_Player_2.field_Private_HashSet_1_UnityAction_1_T_0.Add(new Action<VRC.Player>(Patches.OnPlayerLeave));
+
             LoggerUtill.Log("[Patch] All Patching Procedures Are Complete, Now Starting Client", ConsoleColor.Green);
         }
         private static void OnPlayerJoin(VRC.Player player)
@@ -110,36 +104,8 @@ namespace EvilEye
             {
                 return;
             }
-            LoggerUtill.Log("OnPlayerJoin: " + player.ToString());
-            try
-            {
-                if (player.field_Private_APIUser_0 == null || player.field_Private_APIUser_0.IsSelf)
-                {
-                    Action<VRC.Player> onLocalPlayerJoined = Patches.OnLocalPlayerJoined;
-                    if (onLocalPlayerJoined != null)
-                    {
-                        onLocalPlayerJoined.DelegateSafeInvoke(new object[]
-                        {
-                            player
-                        });
-                    }
-                }
-                else
-                {
-                    Action<VRC.Player> onPlayerJoined = Patches.OnPlayerJoined;
-                    if (onPlayerJoined != null)
-                    {
-                        onPlayerJoined.DelegateSafeInvoke(new object[]
-                        {
-                            player
-                        });
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                LoggerUtill.Log("Error while executing OnPlayerJoin:\n" + ex.ToString());
-            }
+            foreach (OnPlayerJoinEvent @event in Main.Instance.onPlayerJoinEvents)
+                @event.OnPlayerJoin(player);
         }
         private static void OnPlayerLeave(VRC.Player player)
         {
@@ -147,36 +113,8 @@ namespace EvilEye
             {
                 return;
             }
-            LoggerUtill.Log("OnPlayerLeave: " + player.ToString());
-            try
-            {
-                if (player.field_Private_APIUser_0 == null || player.field_Private_APIUser_0.IsSelf)
-                {
-                    Action<VRC.Player> onLocalPlayerLeft = Patches.OnLocalPlayerLeft;
-                    if (onLocalPlayerLeft != null)
-                    {
-                        onLocalPlayerLeft.DelegateSafeInvoke(new object[]
-                        {
-                            player
-                        });
-                    }
-                }
-                else
-                {
-                    Action<VRC.Player> onPlayerLeft = Patches.OnPlayerLeft;
-                    if (onPlayerLeft != null)
-                    {
-                        onPlayerLeft.DelegateSafeInvoke(new object[]
-                        {
-                            player
-                        });
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                LoggerUtill.Log("Error while executing OnPlayerLeave:\n" + ex.ToString());
-            }
+            foreach (OnPlayerLeaveEvent @event in Main.Instance.onPlayerLeaveEvents)
+                @event.PlayerLeave(player);
         }
 
         [Obfuscation(Exclude = true)]
