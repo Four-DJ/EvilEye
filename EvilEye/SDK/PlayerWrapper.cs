@@ -15,7 +15,9 @@ namespace EvilEye.SDK
     static class PlayerWrapper
     {
         public static Player[] GetAllPlayers() { return PlayerManager.prop_PlayerManager_0.prop_ArrayOf_Player_0; }
-
+      
+        public static string GetUserID => GetAPIUser(LocalPlayer).id; 
+        
         public static Player GetByUsrID(string usrID)
         {
             return GetAllPlayers().First(x => x.prop_APIUser_0.id == usrID);
