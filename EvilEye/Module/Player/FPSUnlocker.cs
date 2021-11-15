@@ -10,7 +10,7 @@ namespace EvilEye.Module.Player
 {
     class FPSUnlocker : BaseModule
     {
-        public FPSUnlocker() : base("140 FPS", "FPS Unlocker", Main.Instance.playerButton, null, true) { }
+        public FPSUnlocker() : base("140 FPS", "FPS Unlocker", Main.Instance.settingsButton, null, true) { }
 
         public override void OnEnable()
         {

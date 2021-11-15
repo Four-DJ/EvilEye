@@ -14,7 +14,7 @@ namespace EvilEye.Module.Player
 {
     class AviToID : BaseModule
     {
-        public AviToID() : base("Change By\nAvi ID", "From Clipboard", Main.Instance.playerButton, null, true) { }
+        public AviToID() : base("Change By\nAvi ID", "From Clipboard", Main.Instance.playerButton, null, false) { }
         public override void OnEnable()
         {
             bool flag = GetClipboard().StartsWith("avtr");
