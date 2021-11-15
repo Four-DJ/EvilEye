@@ -108,6 +108,7 @@ namespace EvilEye
             Main.Instance.modules.Add(new XBoxMic());
             Main.Instance.modules.Add(new LoudMic());
             Main.Instance.modules.Add(new HeadFlipper());
+            Main.Instance.modules.Add(new CopyUserID());
 
             Main.Instance.modules.Add(new Event9());
             Main.Instance.modules.Add(new Event209());
