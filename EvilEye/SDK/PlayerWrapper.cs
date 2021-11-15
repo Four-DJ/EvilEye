@@ -32,7 +32,15 @@ namespace EvilEye.SDK
                 return Player.prop_Player_0;
             }
         }
-        
+
+        public static VRCPlayer LocalVRCPlayer
+        {
+            get
+            {
+                return VRCPlayer.field_Internal_Static_VRCPlayer_0;
+            }
+        }
+
         public static APIUser GetAPIUser(this VRC.Player player)
         {
             return player.prop_APIUser_0;

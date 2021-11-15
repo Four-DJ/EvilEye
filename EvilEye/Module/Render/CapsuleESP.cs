@@ -11,7 +11,7 @@ namespace EvilEye.Module.Render
 {
     class CapsuleEsp : BaseModule, OnPlayerJoinEvent
     {
-        public CapsuleEsp() : base("CapsuleEsp", "See Players n shit", Main.Instance.rendererButton, null, true) { }
+        public CapsuleEsp() : base("CapsuleEsp", "See Players n shit", Main.Instance.rendererButton, null, true, true) { }
 
         public override void OnEnable ()
         {

@@ -50,6 +50,7 @@
     <Compile Include="Module\Movement\Fly.cs" />
     <Compile Include="Module\Player\AviToID.cs" />
     <Compile Include="Module\Player\FPSUnlocker.cs" />
+    <Compile Include="Module\Player\UserID.cs" />
     <Compile Include="Module\Render\CapsuleESP.cs" />
     <Compile Include="Module\Player\HeadFlipper.cs" />
     <Compile Include="Module\Player\LoudMic.cs" />
@@ -642,4 +643,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "C:\VRChats\steamapps\common\VRChat\Dependencies\$(TargetFileName)</PostBuildEvent>
+  </PropertyGroup>
 </Project>
