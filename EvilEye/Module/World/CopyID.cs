@@ -11,7 +11,7 @@ namespace EvilEye.Module.World
 {
     class CopyWID : BaseModule
     {
-        public CopyID() : base("Get World ID", "Copy the World + InstanceID", Main.Instance.worldButton, null) { }
+        public CopyWID() : base("Get World ID", "Copy the World + InstanceID", Main.Instance.worldButton, null) { }
 
         public override void OnEnable()
         {

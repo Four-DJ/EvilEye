@@ -132,7 +132,7 @@ namespace EvilEye
 
             Main.Instance.modules.Add(new JoinByID());
             Main.Instance.modules.Add(new Rejoin());
-            Main.Instance.modules.Add(new CopyID());
+            Main.Instance.modules.Add(new CopyWID());
 
             foreach (BaseModule module in Main.Instance.modules)
                 module.OnUIInit();
