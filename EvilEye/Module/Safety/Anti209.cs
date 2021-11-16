@@ -29,7 +29,7 @@ namespace EvilEye.Module.Safety
         {
             if (eventData.Code == 209)
             {
-                LoggerUtill.Log("[Safety] Blocked Invalid 209");
+                //LoggerUtill.Log("[Safety] Blocked Invalid 209");
                 return false;
             }
 

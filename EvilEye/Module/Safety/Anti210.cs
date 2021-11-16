@@ -35,13 +35,13 @@ namespace EvilEye.Module.Safety
                 VRC.Player player = PlayerWrapper.GetPlayerWithPlayerID(eventData.sender);
                 if(player == null)
                 {
-                    LoggerUtill.Log("[Safety] Blocked Invalid 210");
+                    //LoggerUtill.Log("[Safety] Blocked Invalid 210");
                     return false;
                 }
                 Il2CppStructArray<int> il2CppStructArray = eventData.Parameters[245].TryCast<Il2CppStructArray<int>>();
                 if (il2CppStructArray[1] != player.prop_VRCPlayerApi_0.playerId)
                 {
-                    LoggerUtill.Log("[Safety] Blocked Invalid 210");
+                    //LoggerUtill.Log("[Safety] Blocked Invalid 210");
                     return false;
                 }
             }

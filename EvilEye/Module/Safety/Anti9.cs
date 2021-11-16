@@ -33,7 +33,7 @@ namespace EvilEye.Module.Safety
             {
                 if (eventData.Parameters[245].ToString().Length > 150)
                 {
-                    LoggerUtill.Log("[Safety] Blocked Invalid 9");
+                    //LoggerUtill.Log("[Safety] Blocked Invalid 9");
                     return false;
                 }
                 
