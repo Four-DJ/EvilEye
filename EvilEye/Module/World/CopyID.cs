@@ -16,7 +16,7 @@ namespace EvilEye.Module.World
         public override void OnEnable()
         {
            if(WorldWrapper.GetWorldID != "")
-                Misc.SetClipboard(WorldWrapper.GetWorldID);
+                Misc.SetClipboard(RoomManager.field_Internal_Static_ApiWorldInstance_0.instanceId);
 	        LoggerUtill.Log("World ID: " + WorldWrapper.GetWorldID + " copied to clipboard.", ConsoleColor.Green);
         }
  

@@ -8,6 +8,7 @@ using EvilEye.Module.Safety;
 using EvilEye.Module.Settings;
 using EvilEye.Module.World;
 using EvilEye.SDK;
+using EvilEye.SDK.AvatarFavorites;
 using EvilEye.SDK.ButtonAPI;
 using MelonLoader;
 using System;
@@ -56,6 +57,7 @@ namespace EvilEye
         public static void OnApplicationStart()
         {
             Main.Instance = new Main();
+            AviConfig.Instance = AviConfig.Load_AVIS_FAVE();
             ClassInjector.RegisterTypeInIl2Cpp<CustomNameplate>();
             LoggerUtill.DisplayLogo();
 
@@ -87,8 +89,7 @@ namespace EvilEye
         [Obfuscation(Exclude = true)]
         private static void OnUIInit()
         {
-            Main.Instance.quickMenuStuff = new QuickMenuStuff();
-
+            Main.Instance.quickMenuStuff = new QuickMenuStuff(); 
             QMTab mainTab = new QMTab("EvilEye", "EvilEye", "Watching You", Main.Instance.quickMenuStuff.Button_NameplateVisibleIcon.sprite);
 
             Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World");
@@ -120,8 +121,7 @@ namespace EvilEye
             Main.Instance.modules.Add(new VRCW());
 
             Main.Instance.modules.Add(new RateLimit());
-            Main.Instance.modules.Add(new Anti9());
-            Main.Instance.modules.Add(new Anti7());
+            Main.Instance.modules.Add(new Anti9()); 
             Main.Instance.modules.Add(new Anti209());
             Main.Instance.modules.Add(new Anti210());
 
@@ -129,6 +129,8 @@ namespace EvilEye
             Main.Instance.modules.Add(new EventLogger());
             Main.Instance.modules.Add(new RpcLogger());
             Main.Instance.modules.Add(new UnityLogger());
+            Main.Instance.modules.Add(new ConsoleClear());
+            Main.Instance.modules.Add(new QuickRestart());
 
             Main.Instance.modules.Add(new CapsuleEsp());
 
@@ -159,7 +161,14 @@ namespace EvilEye
                 if (avatar.releaseStatus == "public")
                     PlayerWrapper.ChangeAvatar(avatar.id);
             });
-            
+            //new QMSingleButton(Main.Instance.quickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions").transform, "Add Fav", "Adds Avatar To Favorites", null, delegate
+            //{
+            //    ApiAvatar avatar = PlayerWrapper.GetByUsrID(Main.Instance.quickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_ApiAvatar_0;
+            //    if (avatar.releaseStatus == "public")
+            //        Avatar_Favorites.FaveAvi(avatar, 1);
+            //        AviConfig.Instance.SaveAviConfig();
+            //});
+
             new QMSingleButton(Main.Instance.quickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions").transform, "Get UserID", "UserID", null, delegate
             {
                 APIUser SelectedPlayer = PlayerWrapper.GetByUsrID(Main.Instance.quickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
@@ -173,8 +182,17 @@ namespace EvilEye
                     PlayerWrapper.Teleport(PlayerWrapper.GetByUsrID(Main.Instance.quickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0));
                     
             });
-            
+             
             LoggerUtill.Log("[UI] Done", ConsoleColor.Green);
+            try
+            {
+
+                //Avatar_Favorites.startAvis();
+            }
+            catch (Exception ex)
+            {
+                LoggerUtill.Log(ex.ToString(), ConsoleColor.Red);
+            }
         }
 
 

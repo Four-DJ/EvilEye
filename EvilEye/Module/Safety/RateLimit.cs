@@ -59,7 +59,7 @@ namespace EvilEye.Module.Safety
             }
             if (blockedEvents.Contains(eventData.Code))
             {
-                LoggerUtill.Log("[Safety] Blocked spammed event " + eventData.Code + " from " + PlayerWrapper.GetPlayerWithPlayerID(eventData.sender)?.prop_APIUser_0.displayName);
+                LoggerUtill.Log("[Safety] Blocked spammed event " + eventData.Code + " from " + PlayerWrapper.GetPlayerWithPlayerID(eventData.sender)?.GetName());
                 return false;
             }
 

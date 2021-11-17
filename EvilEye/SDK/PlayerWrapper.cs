@@ -7,6 +7,7 @@ using UnityEngine;
 using VRC;
 using VRC.Core;
 using VRC.DataModel;
+using VRC.SDKBase;
 using VRC.UI;
 using VRC.UI.Elements.Menus;
 
@@ -91,6 +92,34 @@ namespace EvilEye.SDK
         public static void SetHide(this VRCPlayer Instance, bool State)
         {
             Instance._player.SetHide(State);
+        }
+        internal static VRCPlayer GetCurrentPlayer()
+        {
+            return VRCPlayer.field_Internal_Static_VRCPlayer_0;
+        }
+        public static Player GetPlayer(this VRCPlayer player)
+        {
+            return player.prop_Player_0;
+        }
+        public static APIUser GetAPIUser(this VRCPlayer Instance)
+        {
+            return Instance.GetPlayer().GetAPIUser();
+        }
+        public static VRCPlayerApi GetVRCPlayerApi(this Player Instance)
+        {
+            return (Instance == null) ? null : Instance.prop_VRCPlayerApi_0;
+        }
+        public static string UserID(this VRCPlayer Instance)
+        {
+            return Instance.GetAPIUser().id;
+        }
+        public static bool GetIsMaster(this Player Instance)
+        {
+            return Instance.GetVRCPlayerApi().isMaster;
+        }
+        public static string GetName(this Player player)
+        {
+            return player.GetAPIUser().displayName;
         }
         public static void DelegateSafeInvoke(this Delegate @delegate, params object[] args)
         {

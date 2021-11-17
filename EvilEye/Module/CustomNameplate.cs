@@ -54,7 +54,10 @@ namespace EvilEye.Module
                 text = "<color=yellow>Lagging</color>";
             else if(count > 30)
                 text = "<color=red>Crashed</color>";
-
+            if (player.GetIsMaster())
+            {
+                statsText.text = "[" + player.GetPlatform() + "] [<color=#0352ff>HOST</color>]" + " [<color=#ff8400>F</color>]: " + player.GetFrames() + " [<color=#ff8400>P</color>]: " + player.GetPing() + " [" + text + "]";
+            }
             statsText.text = "[" + player.GetPlatform() + "] [<color=#ff8400>F</color>]: " + player.GetFrames() + " [<color=#ff8400>P</color>]: " + player.GetPing() + " [" + text + "]";
         }
 
