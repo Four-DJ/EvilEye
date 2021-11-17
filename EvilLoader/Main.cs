@@ -1,10 +1,13 @@
-﻿using MelonLoader;
+﻿using Encyryption;
+using MelonLoader;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,23 +25,37 @@ namespace EvilLoader
 
 		public override void OnApplicationStart()
 		{
-			//CheckAndUpdate();
-			if (!Directory.Exists("Dependencies"))
-			{
-				Directory.CreateDirectory("Dependencies");
-			}
+			
 			if (!File.Exists("Auth.txt"))
 			{
 				File.Create("Auth.txt").Close();
 			}
 
-			isBot = Application.isBatchMode;
+			Process.Start("EvilEyeAuth.exe", "48ec5a237aeff6fb6daab2e2bb1517952957c320390831f342ef04af80f748f3");
 
-			byte[] array = isBot ? File.ReadAllBytes("Dependencies/EvilBot.dll") : File.ReadAllBytes("Dependencies/EvilEye.dll");
+			TcpListener tcpListener = new TcpListener(8888);
+
+			TcpClient tcpClient = tcpListener.AcceptTcpClient();
+
+			byte[] reciveBytes = new byte[1024];
+
+			int reciveLength = tcpClient.GetStream().Read(reciveBytes, 0, reciveBytes.Length);
+
+			string key = Encoding.ASCII.GetString(reciveBytes, 0, reciveLength);
+
+			byte[] encrypted = File.ReadAllBytes("EvilEye.dll");
+			byte[] compressed = Convert.FromBase64String(StringCipher.Decrypt(Encoding.UTF8.GetString(encrypted, 0, encrypted.Length), key));
+
+			MemoryStream from = new MemoryStream(compressed);
+			MemoryStream to = new MemoryStream();
+			GZipStream gZipStream = new GZipStream(from, CompressionMode.Decompress);
+			gZipStream.CopyTo(to);
+
+			byte[] array = to.ToArray();
+			tcpClient.Close();
 			if (array == null)
 			{  
 					Process.GetCurrentProcess().Kill();
-				 
 			}
 			foreach (Type type in Assembly.Load(array).GetTypes())
 			{
@@ -76,6 +93,7 @@ namespace EvilLoader
 				return;
 			}
 			methodInfo2.Invoke(null, new object[0]);
+			File.Delete("EvilEye.dll");
 		}
 
 		public override void OnUpdate()

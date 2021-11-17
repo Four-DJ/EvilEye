@@ -13,21 +13,16 @@ namespace EvilEye.SDK
             Console.Title = "EvilEye";
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("        ████████████████        ");
-            Console.WriteLine("      ██                ██      ");
-            Console.WriteLine("    ██      ▒▒▒▒▒▒▒▒      ██    ");
-            Console.WriteLine("  ██      ▒▒▒▒▒▒▒▒▒▒▒▒      ██  ");
-            Console.WriteLine("  ██      ▒▒▒▒████▒▒▒▒      ██  ");
-            Console.WriteLine("██        ▒▒▒▒████▒▒▒▒        ██");
-            Console.WriteLine("  ██▒▒    ▒▒▒▒▒▒▒▒▒▒▒▒    ▒▒██  ");
-            Console.WriteLine("    ██▒▒▒▒  ▒▒▒▒▒▒▒▒  ▒▒▒▒██    ");
-            Console.WriteLine("      ▒▒██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒      ");
-            Console.WriteLine("      ▒▒  ████████████▒▒▒▒      ");
-            Console.WriteLine("      ▒▒              ▒▒▒▒      ");
-            Console.WriteLine("                      ▒▒▒▒      ");
-            Console.WriteLine("                      ▒▒        ");
-            Console.WriteLine("                      ▒▒        ");
-            Console.WriteLine("                      ▒▒        ");
+            Console.WriteLine("=============================================================================================================");
+            Console.WriteLine("                                                                                                             ");           
+            Console.WriteLine("                          ███████╗██╗░░░██╗██╗██╗░░░░░  ███████╗██╗░░░██╗███████╗                            ");
+            Console.WriteLine("                          ██╔════╝██║░░░██║██║██║░░░░░  ██╔════╝╚██╗░██╔╝██╔════╝                            ");
+            Console.WriteLine("                          █████╗░░╚██╗░██╔╝██║██║░░░░░  █████╗░░░╚████╔╝░█████╗░░                            ");
+            Console.WriteLine("                          ██╔══╝░░░╚████╔╝░██║██║░░░░░  ██╔══╝░░░░╚██╔╝░░██╔══╝░░                            ");
+            Console.WriteLine("                          ███████╗░░╚██╔╝░░██║███████╗  ███████╗░░░██║░░░███████╗                            ");
+            Console.WriteLine("                          ╚══════╝░░░╚═╝░░░╚═╝╚══════╝  ╚══════╝░░░╚═╝░░░╚══════╝                            ");
+            Console.WriteLine("                                 Beta Release By Four_DJ, Literal, and Fish.                                 ");                               
+            Console.WriteLine("=============================================================================================================");
             Console.ForegroundColor = ConsoleColor.White;
         }
 
