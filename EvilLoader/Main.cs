@@ -51,21 +51,13 @@ namespace EvilLoader
 
 			int size = BitConverter.ToInt32(bufferBytes, 0);
 
-			int bruh = size / 1024;
-
-			if (size % 1024 != 0)
-				bruh++;
-			bruh++;
-
-			List<byte> bytesToRead = new List<byte>();
-			for (int i = 0; i < bruh; i++)
+			byte[] array =  new byte[size];
+			byte[] smallbuffer = new byte[1];
+			for (int i = 0; i < array.Length; i++)
 			{
-				int bytesread = networkStream.Read(bufferBytes, 0, bufferBytes.Length);
-				for (int j = 0; j < bytesread; j++)
-					bytesToRead.Add(bufferBytes[j]);
+				int bytesread = networkStream.Read(smallbuffer, 0, smallbuffer.Length);
+				array[i] = smallbuffer[0];
 			}
-
-			byte[] array = bytesToRead.ToArray();
 
 			if (array == null)
 			{  
