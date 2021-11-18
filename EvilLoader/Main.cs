@@ -9,7 +9,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -21,38 +23,50 @@ namespace EvilLoader
 {
     public class Main : MelonMod
     {
-		bool isBot = false;
-
 		public override void OnApplicationStart()
 		{
-			
+			TcpClient client = new TcpClient("www.pandagaming.se", 8888);
+
 			if (!File.Exists("Auth.txt"))
+				File.Create("Auth.txt");
+
+			NetworkStream networkStream = client.GetStream();
+			byte[] bufferBytes = new byte[1024];
+
+			int reciveLength = networkStream.Read(bufferBytes, 0, bufferBytes.Length);
+			string encryptionKey = StringCipher.Decrypt(Encoding.ASCII.GetString(bufferBytes, 0, reciveLength), "48ec5a237aeff6fb6daab2e2bb1517952957c320390831f342ef04af80f748f3");
+
+			var crypt = new SHA256Managed();
+			string hash = String.Empty;
+			byte[] crypto = crypt.ComputeHash(Encoding.ASCII.GetBytes(File.ReadAllText("Auth.txt")));
+			foreach (byte theByte in crypto)
 			{
-				File.Create("Auth.txt").Close();
+				hash += theByte.ToString("x2");
 			}
 
-			Process.Start("EvilEyeAuth.exe", "48ec5a237aeff6fb6daab2e2bb1517952957c320390831f342ef04af80f748f3");
+			byte[] bytesToSend = Encoding.ASCII.GetBytes(StringCipher.Encrypt("0 " + hash, encryptionKey));
+			networkStream.Write(bytesToSend, 0, bytesToSend.Length);
 
-			TcpListener tcpListener = new TcpListener(8888);
+			networkStream.Read(bufferBytes, 0, bufferBytes.Length);
 
-			TcpClient tcpClient = tcpListener.AcceptTcpClient();
+			int size = BitConverter.ToInt32(bufferBytes, 0);
 
-			byte[] reciveBytes = new byte[1024];
+			int bruh = size / 1024;
 
-			int reciveLength = tcpClient.GetStream().Read(reciveBytes, 0, reciveBytes.Length);
+			if (size % 1024 != 0)
+				bruh++;
+			bruh++;
 
-			string key = Encoding.ASCII.GetString(reciveBytes, 0, reciveLength);
+			List<byte> bytesToRead = new List<byte>();
+			for (int i = 0; i < bruh; i++)
+			{
+				int bytesread = networkStream.Read(bufferBytes, 0, bufferBytes.Length);
+				for (int j = 0; j < bytesread; j++)
+					bytesToRead.Add(bufferBytes[j]);
+			}
 
-			byte[] encrypted = File.ReadAllBytes("EvilEye.dll");
-			byte[] compressed = Convert.FromBase64String(StringCipher.Decrypt(Encoding.UTF8.GetString(encrypted, 0, encrypted.Length), key));
+			byte[] array = bytesToRead.ToArray();
 
-			MemoryStream from = new MemoryStream(compressed);
-			MemoryStream to = new MemoryStream();
-			GZipStream gZipStream = new GZipStream(from, CompressionMode.Decompress);
-			gZipStream.CopyTo(to);
-
-			byte[] array = to.ToArray();
-			tcpClient.Close();
 			if (array == null)
 			{  
 					Process.GetCurrentProcess().Kill();
@@ -93,7 +107,7 @@ namespace EvilLoader
 				return;
 			}
 			methodInfo2.Invoke(null, new object[0]);
-			File.Delete("EvilEye.dll");
+			client.Close();
 		}
 
 		public override void OnUpdate()
