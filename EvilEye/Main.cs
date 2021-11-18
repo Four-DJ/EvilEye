@@ -7,27 +7,18 @@ using EvilEye.Module.Render;
 using EvilEye.Module.Safety;
 using EvilEye.Module.Settings;
 using EvilEye.Module.World;
-using EvilEye.Module.Exploit;
 using EvilEye.SDK;
 using EvilEye.SDK.AvatarFavorites;
 using EvilEye.SDK.ButtonAPI;
-using MelonLoader;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
-using TMPro;
 using UnhollowerRuntimeLib;
 using UnityEngine;
-using UnityEngine.UI;
 using VRC.Core;
-using VRC.UI.Core.Styles;
 
 namespace EvilEye
 {
