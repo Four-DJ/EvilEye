@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WatchDogs.Modules.Events
+namespace EvilEye.Modules.Events
 {
     interface OnUIEvent
     {

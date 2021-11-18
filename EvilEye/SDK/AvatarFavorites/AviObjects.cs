@@ -89,7 +89,7 @@ namespace EvilEye.SDK.AvatarFavorites
 			}
 		}
 
-		// Token: 0x06000120 RID: 288 RVA: 0x0000B220 File Offset: 0x00009420
+		
 		internal static void ListOFMesh(this GameObject avatar)
 		{
 			AviObjects.MeshUwU.Clear();
@@ -107,7 +107,7 @@ namespace EvilEye.SDK.AvatarFavorites
 			}
 		}
 
-		// Token: 0x06000121 RID: 289 RVA: 0x0000B2C0 File Offset: 0x000094C0
+		
 		internal static void Toggler_And_Deleter(this GameObject Toggle, bool Delete, bool Isgoingon)
 		{
 			bool flag = Toggle == null;
