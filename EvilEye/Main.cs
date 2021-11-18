@@ -10,23 +10,15 @@ using EvilEye.Module.World;
 using EvilEye.SDK;
 using EvilEye.SDK.AvatarFavorites;
 using EvilEye.SDK.ButtonAPI;
-using MelonLoader;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
-using TMPro;
 using UnhollowerRuntimeLib;
 using UnityEngine;
-using UnityEngine.UI;
 using VRC.Core;
-using VRC.UI.Core.Styles;
 
 namespace EvilEye
 {
@@ -112,13 +104,14 @@ namespace EvilEye
             Main.Instance.modules.Add(new CopyUserID());
 
             Main.Instance.modules.Add(new Event9());
-            Main.Instance.modules.Add(new Event209());
-            Main.Instance.modules.Add(new Event210());
+            //Main.Instance.modules.Add(new Event209());   Temp Disabled (Working on It some more)
+            //Main.Instance.modules.Add(new Event210());   Temp Disabled (Working on it some more)
             Main.Instance.modules.Add(new AssetBundleCrash());
             Main.Instance.modules.Add(new QuestCrash());
             Main.Instance.modules.Add(new FreezePlayer());
             Main.Instance.modules.Add(new VRCA());
             Main.Instance.modules.Add(new VRCW());
+            //Main.Instance.modules.Add(new GhostWalk());   Won't Raise the OPEvent :( unless they changed it
 
             Main.Instance.modules.Add(new RateLimit());
             Main.Instance.modules.Add(new Anti9()); 

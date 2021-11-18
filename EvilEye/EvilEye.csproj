@@ -30,6 +30,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Events\OnEventEvent.cs" />
     <Compile Include="Events\OnPlayerJoinEvent.cs" />
@@ -38,10 +41,12 @@
     <Compile Include="Events\OnSendOPEvent.cs" />
     <Compile Include="Events\OnUpdateEvent.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="Module\Exploit\GhostWalk.cs" />
     <Compile Include="Module\Safety\AntiIntro.cs" />
     <Compile Include="Module\Settings\QuickRestart.cs" />
     <Compile Include="SDK\AvatarFavorites\AviConfig.cs" />
     <Compile Include="SDK\AvatarFavorites\AviObjects.cs" />
+    <Compile Include="SDK\AvatarFavorites\UnlimitedFavorites.cs" />
     <Compile Include="SDK\BaseModule.cs" />
     <Compile Include="Module\CustomNameplate.cs" />
     <Compile Include="Module\Exploit\AssetBundleCrash.cs" />
@@ -85,6 +90,7 @@
     <Compile Include="SDK\Config.cs" />
     <Compile Include="SDK\LoggerUtill.cs" />
     <Compile Include="SDK\Misc.cs" />
+    <Compile Include="Events\OnUIEvent.cs" />
     <Compile Include="SDK\Photon\PhotonExtensions.cs" />
     <Compile Include="SDK\Photon\Serialization.cs" />
     <Compile Include="SDK\PlayerWrapper.cs" />
@@ -651,6 +657,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\VRChat\Dependencies\$(TargetFileName)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
