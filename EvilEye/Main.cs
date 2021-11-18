@@ -7,7 +7,7 @@ using EvilEye.Module.Render;
 using EvilEye.Module.Safety;
 using EvilEye.Module.Settings;
 using EvilEye.Module.World;
-using EvilEye.Modules.Exploits;
+using EvilEye.Module.Exploit;
 using EvilEye.SDK;
 using EvilEye.SDK.AvatarFavorites;
 using EvilEye.SDK.ButtonAPI;
@@ -120,7 +120,7 @@ namespace EvilEye
             Main.Instance.modules.Add(new FreezePlayer());
             Main.Instance.modules.Add(new VRCA());
             Main.Instance.modules.Add(new VRCW());
-            Main.Instance.modules.Add(new GhostWalk());
+            //Main.Instance.modules.Add(new GhostWalk());   Won't Raise the OPEvent :( unless they changed it
 
             Main.Instance.modules.Add(new RateLimit());
             Main.Instance.modules.Add(new Anti9()); 
