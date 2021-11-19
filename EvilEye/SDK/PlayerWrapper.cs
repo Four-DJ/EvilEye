@@ -83,7 +83,43 @@ namespace EvilEye.SDK
                 return "<color=grey>PC</color>";
             }
         }
-
+        public static int GetActorNumber(this Player player)
+        {
+            return player.GetVRCPlayerApi().playerId;
+        }
+        public static PlayerManager PManager
+        {
+            get
+            {
+                return PlayerManager.field_Private_Static_PlayerManager_0;
+            }
+        }
+        public static List<Player> AllPlayers
+        {
+            get
+            {
+                return PlayerWrapper.PManager.field_Private_List_1_Player_0.ToArray().ToList<Player>();
+            }
+        }
+        public static VRC.Player FetchPlayerWithNumber(int actorNumber)
+        {
+            foreach (VRC.Player player in PlayerManager.Method_Public_Static_ArrayOf_Player_0())
+            {
+                //bool flag = player.Method_Public_get_Int32_0() == actorNumber;
+                bool flag = player.Method_Public_Int32_0() == actorNumber;
+                if (flag)
+                {
+                    return player;
+                }
+            }
+            return null;
+        }
+        public static Player GetPlayer2(int ActorNumber)
+        {
+            return (from p in PlayerWrapper.AllPlayers
+                    where p.GetActorNumber() == ActorNumber
+                    select p).FirstOrDefault<Player>();
+        }
         public static IUser GetSelectedUser(this SelectedUserMenuQM selectMenu)
         {
             return selectMenu.field_Private_IUser_0;

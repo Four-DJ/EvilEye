@@ -21,6 +21,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using VRC.SDKBase;
 using MelonLoader;
+using VRC.Networking;
 
 namespace EvilEye
 {
@@ -42,6 +43,15 @@ namespace EvilEye
             catch(Exception ex)
             {
                 LoggerUtill.Log("[Patches] Could not patch Analystics failed\n" + ex, ConsoleColor.Red);
+            }
+            try
+            {
+                Instance.Patch(typeof(UdonSync).GetMethod("UdonSyncRunProgramAsRPC"), new HarmonyMethod(AccessTools.Method(typeof(Patches), nameof(OnUdon))));
+                LoggerUtill.Log("[Patches] Patched Udon", ConsoleColor.Green);
+            }
+            catch (Exception ex)
+            {
+                LoggerUtill.Log("[Patches] Could not patch Udon failed\n" + ex, ConsoleColor.Red);
             }
             try
             {
@@ -98,6 +108,10 @@ namespace EvilEye
 
             LoggerUtill.Log("[Patch] All Patching Procedures Are Complete, Now Starting Client", ConsoleColor.Green);
         }
+        private static HarmonyMethod GetLocalPatch(string methodName)
+        {
+            return new HarmonyMethod(typeof(Patches).GetMethod(methodName, BindingFlags.Static | BindingFlags.NonPublic));
+        }
         private static void OnPlayerJoin(VRC.Player player)
         {
             if (player == null)
@@ -149,7 +163,12 @@ namespace EvilEye
                 LoggerUtill.Log("[Unity] " + Il2CppSystem.Convert.ToString(__0));
             return true;
         }
-
+        [Obfuscation(Exclude = true)]
+        private static bool OnUdon(string __0, VRC.Player __1)
+        {
+            LoggerUtill.Log(__0 + " From " + __1.field_Private_APIUser_0.displayName);
+            return true;
+        }
         [Obfuscation(Exclude = true)]
         private static bool FakeHWID(ref string __result)
         {
@@ -173,8 +192,7 @@ namespace EvilEye
             }
             __result = Patches.newHWID;
             return false;
-        }
-
+        } 
         [Obfuscation(Exclude = true)]
         private static bool OnEvent(EventData __0)
         {

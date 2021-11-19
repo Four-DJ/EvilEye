@@ -39,9 +39,12 @@
     <Compile Include="Events\OnPlayerLeaveEvent.cs" />
     <Compile Include="Events\OnRPCEvent.cs" />
     <Compile Include="Events\OnSendOPEvent.cs" />
+    <Compile Include="Events\OnUdonEvent.cs" />
     <Compile Include="Events\OnUpdateEvent.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Module\Exploit\GhostWalk.cs" />
+    <Compile Include="Module\Exploit\UdonSpam.cs" />
+    <Compile Include="Module\Safety\AntiBot.cs" />
     <Compile Include="Module\Safety\AntiIntro.cs" />
     <Compile Include="Module\Settings\QuickRestart.cs" />
     <Compile Include="SDK\AvatarFavorites\AviConfig.cs" />
@@ -654,6 +657,9 @@
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Module\World\World Hacks\Murder\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

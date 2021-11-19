@@ -13,7 +13,7 @@ namespace EvilEye.SDK.ButtonAPI
     {
 		public static void HideCurrentPopup(this VRCUiPopupManager vrcUiPopupManager)
 		{
-			VRCUiManager.prop_VRCUiManager_0.HideScreen("POPUP");
+			//VRCUiManager.prop_VRCUiManager_0.HideScreen("POPUP");
 		}
 		public static void ShowStandardPopup(this VRCUiPopupManager vrcUiPopupManager, string title, string content, System.Action<VRCUiPopup> onCreated = null)
 		{

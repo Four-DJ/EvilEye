@@ -34,6 +34,7 @@ namespace EvilEye
         public QMNestedButton exploistButton;
         public QMNestedButton spoofersButton;
         public QMNestedButton safetyButton;
+        public QMNestedButton worldhacksButton;
         public QMNestedButton rendererButton;
         public QMNestedButton botButton;
         public QMNestedButton settingsButton;
@@ -42,6 +43,7 @@ namespace EvilEye
         public List<OnPlayerJoinEvent> onPlayerJoinEvents = new List<OnPlayerJoinEvent>();
         public List<OnPlayerLeaveEvent> onPlayerLeaveEvents = new List<OnPlayerLeaveEvent>();
         public List<OnUpdateEvent> onUpdateEvents = new List<OnUpdateEvent>();
+        public List<OnUdonEvent> onUdonEvents = new List<OnUdonEvent>();
         public List<OnEventEvent> onEventEvents = new List<OnEventEvent>();
         public List<OnRPCEvent> onRPCEvents = new List<OnRPCEvent>();
         public List<OnSendOPEvent> onSendOPEvents = new List<OnSendOPEvent>();
@@ -84,7 +86,7 @@ namespace EvilEye
             Main.Instance.quickMenuStuff = new QuickMenuStuff(); 
             QMTab mainTab = new QMTab("EvilEye", "EvilEye", "Watching You", Main.Instance.quickMenuStuff.Button_NameplateVisibleIcon.sprite);
 
-            Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World");
+            Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World"); 
             Main.Instance.playerButton = new QMNestedButton(mainTab.menuTransform, "Player");
             Main.Instance.movementButton = new QMNestedButton(mainTab.menuTransform, "Movement");
             Main.Instance.exploistButton = new QMNestedButton(mainTab.menuTransform, "Exploits");
@@ -114,6 +116,7 @@ namespace EvilEye
             //Main.Instance.modules.Add(new GhostWalk());   Won't Raise the OPEvent :( unless they changed it
 
             Main.Instance.modules.Add(new RateLimit());
+            Main.Instance.modules.Add(new AntiBot());
             Main.Instance.modules.Add(new Anti9()); 
             Main.Instance.modules.Add(new Anti209());
             Main.Instance.modules.Add(new Anti210());
