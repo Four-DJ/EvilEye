@@ -90,7 +90,7 @@ namespace EvilEye
             //QMNestedButton world = Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World");
             //QMNestedButton hacks = Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World");
             //Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World");
-            //Main.Instance.worldhacksButton = new QMNestedButton(world.menuTransform, "World Hacks");
+            //Main.Instance.worldhacksButton = new QMNestedButton(world.menuTransform, "World Hacks");  // my attempt at nested button inside of a nested button
             Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World");
             Main.Instance.playerButton = new QMNestedButton(mainTab.menuTransform, "Player");
             Main.Instance.movementButton = new QMNestedButton(mainTab.menuTransform, "Movement");

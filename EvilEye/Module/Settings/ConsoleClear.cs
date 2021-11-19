@@ -25,7 +25,7 @@ namespace EvilEye.Module.Settings
             Console.WriteLine("                                 Beta Release By Four_DJ, Literal, and Fish.                                 ");
             Console.WriteLine("=============================================================================================================");
             Console.ForegroundColor = ConsoleColor.White;
-            LoggerUtill.Log("Cleared Console!", Console.ForegroundColor);
+            LoggerUtill.Log("Cleared Console!", ConsoleColor.Green);
         }
     }
 }

@@ -155,8 +155,11 @@ namespace EvilEye
             return true;
         }
         [Obfuscation(Exclude = true)]
-        private static bool OnUdon(string __0, VRC.Player __1)
-        { 
+        public static bool OnUdon(string __0, VRC.Player __1)
+        {
+            foreach (OnUdonEvent @udon in Main.Instance.onUdonEvents)
+                if (!@udon.OnUdon(__0,__1))
+                    return true;
             return true;
         }
         [Obfuscation(Exclude = true)]

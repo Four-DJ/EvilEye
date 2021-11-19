@@ -25,7 +25,7 @@ namespace EvilEye.Module.Settings
         }
         public bool OnUdon(string __0, VRC.Player __1)
         {
-            LoggerUtill.Log(__0 + " From " + __1.field_Private_APIUser_0.displayName);
+            LoggerUtill.Log("Type: " + __0 + " | From: " + __1.field_Private_APIUser_0.displayName);
             return true;
         }
     }
