@@ -105,8 +105,7 @@ namespace EvilEye.SDK
         {
             foreach (VRC.Player player in PlayerManager.Method_Public_Static_ArrayOf_Player_0())
             {
-                //bool flag = player.Method_Public_get_Int32_0() == actorNumber;
-                bool flag = player.Method_Public_Int32_0() == actorNumber;
+                bool flag = player.Method_Public_Int32_0() == actorNumber; 
                 if (flag)
                 {
                     return player;

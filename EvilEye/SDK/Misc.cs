@@ -20,7 +20,20 @@ namespace EvilEye.SDK
             }
             return s;
         }
-        
+        internal static string GetClipboard()
+        {
+            bool flag = Clipboard.ContainsText();
+            string result;
+            if (flag)
+            {
+                result = Clipboard.GetText();
+            }
+            else
+            {
+                result = null;
+            }
+            return result;
+        }
         internal static void SetClipboard(string Set) //good shit fishyboi
         {
             bool flag = Clipboard.ContainsText();

@@ -35,6 +35,7 @@ namespace EvilEye
         public QMNestedButton spoofersButton;
         public QMNestedButton safetyButton;
         public QMNestedButton worldhacksButton;
+        public QMNestedButton murderbutton;
         public QMNestedButton rendererButton;
         public QMNestedButton botButton;
         public QMNestedButton settingsButton;
@@ -86,7 +87,11 @@ namespace EvilEye
             Main.Instance.quickMenuStuff = new QuickMenuStuff(); 
             QMTab mainTab = new QMTab("EvilEye", "EvilEye", "Watching You", Main.Instance.quickMenuStuff.Button_NameplateVisibleIcon.sprite);
 
-            Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World"); 
+            QMNestedButton world = Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World");
+            QMNestedButton hacks = Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World");
+            Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World");
+            Main.Instance.worldhacksButton = new QMNestedButton(world.menuTransform, "World Hacks");
+            Main.Instance.murderbutton = new QMNestedButton(world.menuTransform, "murder");
             Main.Instance.playerButton = new QMNestedButton(mainTab.menuTransform, "Player");
             Main.Instance.movementButton = new QMNestedButton(mainTab.menuTransform, "Movement");
             Main.Instance.exploistButton = new QMNestedButton(mainTab.menuTransform, "Exploits");
@@ -106,6 +111,7 @@ namespace EvilEye
             Main.Instance.modules.Add(new CopyUserID());
 
             Main.Instance.modules.Add(new Event9());
+            Main.Instance.modules.Add(new UdonSpam());
             //Main.Instance.modules.Add(new Event209());   Temp Disabled (Working on It some more)
             //Main.Instance.modules.Add(new Event210());   Temp Disabled (Working on it some more)
             Main.Instance.modules.Add(new AssetBundleCrash());
@@ -122,6 +128,7 @@ namespace EvilEye
             Main.Instance.modules.Add(new Anti210());
 
             Main.Instance.modules.Add(new OPSendLogger());
+            Main.Instance.modules.Add(new UdonLogger());
             Main.Instance.modules.Add(new EventLogger());
             Main.Instance.modules.Add(new RpcLogger());
             Main.Instance.modules.Add(new UnityLogger());

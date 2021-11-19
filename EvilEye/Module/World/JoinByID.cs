@@ -1,4 +1,5 @@
-﻿using EvilEye.SDK.ButtonAPI;
+﻿using EvilEye.SDK;
+using EvilEye.SDK.ButtonAPI;
 using System;
 using System.Windows.Forms;
 using UnityEngine;
@@ -14,7 +15,7 @@ namespace EvilEye.Module.World
 
         public override void OnEnable()
         {
-			string id = GetClipboard();
+			string id = Misc.GetClipboard();
 			bool flag = !Networking.GoToRoom(id);
 			if (flag)
 			{
@@ -28,20 +29,6 @@ namespace EvilEye.Module.World
 				}
 				new PortalInternal().Method_Private_Void_String_String_PDM_0(array[0], array[1]);
 			}
-        }
-		internal static string GetClipboard()
-		{
-			bool flag = Clipboard.ContainsText();
-			string result;
-			if (flag)
-			{
-				result = Clipboard.GetText();
-			}
-			else
-			{
-				result = null;
-			}
-			return result;
-		}
+        } 
 	}
 }

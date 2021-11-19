@@ -55,15 +55,6 @@ namespace EvilEye
             }
             try
             {
-                
-                LoggerUtill.Log("[Patches] Patched Player Rules", ConsoleColor.Green);
-            }
-            catch (Exception ex)
-            {
-                LoggerUtill.Log("[Patches] Could not patch Player Rules failed\n" + ex, ConsoleColor.Red);
-            }
-            try
-            {
                 Instance.Patch(typeof(LoadBalancingClient).GetMethod("OnEvent"), new HarmonyMethod(AccessTools.Method(typeof(Patches), nameof(OnEvent))));
                 Instance.Patch(typeof(VRC_EventDispatcherRFC).GetMethod("Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0"), new HarmonyMethod(AccessTools.Method(typeof(Patches), nameof(OnRPC))));
                 Instance.Patch(AccessTools.Method(typeof(LoadBalancingClient), "Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0", null, null), new HarmonyMethod(AccessTools.Method(typeof(Patches), nameof(OpRaiseEvent))));
@@ -165,8 +156,7 @@ namespace EvilEye
         }
         [Obfuscation(Exclude = true)]
         private static bool OnUdon(string __0, VRC.Player __1)
-        {
-            LoggerUtill.Log(__0 + " From " + __1.field_Private_APIUser_0.displayName);
+        { 
             return true;
         }
         [Obfuscation(Exclude = true)]
