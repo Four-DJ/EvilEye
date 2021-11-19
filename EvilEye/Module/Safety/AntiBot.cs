@@ -32,13 +32,13 @@ namespace EvilEye.Module.Safety
                 bool flag2 = player._playerNet.field_Private_Int16_0 <= 0 && 1000 / (int)player._playerNet.field_Private_Byte_0 <= 0;
                 if (flag2)
                 {
-                    LoggerUtill.Log($"Blocked Event {eventData.Code} from {player.field_Private_APIUser_0.displayName} | PhotonID {player.prop_VRCPlayerApi_0.playerId}  | Reason: Player Detected As Photon Bot", ConsoleColor.DarkRed);
+                    LoggerUtill.Log($"Blocked Event {eventData.Code} from {player.field_Private_APIUser_0.displayName} | Reason: Player Detected As Photon Bot", ConsoleColor.DarkRed);
                     return false;
                 }
                 bool flag3 = player.transform.position == Vector3.zero;
                 if (flag3)
                 {
-                    LoggerUtill.Log($"Blocked Event {eventData.Code} from {player.field_Private_APIUser_0.displayName} | PhotonID {player.prop_VRCPlayerApi_0.playerId} | Reason: Player Detected As Photon Bot", ConsoleColor.DarkRed);
+                    LoggerUtill.Log($"Blocked Event {eventData.Code} from {player.field_Private_APIUser_0.displayName} | Reason: Player Detected As Photon Bot", ConsoleColor.DarkRed);
                     return false;
                 }
             }

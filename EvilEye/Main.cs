@@ -87,11 +87,11 @@ namespace EvilEye
             Main.Instance.quickMenuStuff = new QuickMenuStuff(); 
             QMTab mainTab = new QMTab("EvilEye", "EvilEye", "Watching You", Main.Instance.quickMenuStuff.Button_NameplateVisibleIcon.sprite);
 
-            QMNestedButton world = Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World");
-            QMNestedButton hacks = Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World");
+            //QMNestedButton world = Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World");
+            //QMNestedButton hacks = Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World");
+            //Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World");
+            //Main.Instance.worldhacksButton = new QMNestedButton(world.menuTransform, "World Hacks");
             Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World");
-            Main.Instance.worldhacksButton = new QMNestedButton(world.menuTransform, "World Hacks");
-            Main.Instance.murderbutton = new QMNestedButton(world.menuTransform, "murder");
             Main.Instance.playerButton = new QMNestedButton(mainTab.menuTransform, "Player");
             Main.Instance.movementButton = new QMNestedButton(mainTab.menuTransform, "Movement");
             Main.Instance.exploistButton = new QMNestedButton(mainTab.menuTransform, "Exploits");
