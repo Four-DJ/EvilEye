@@ -13,8 +13,12 @@ namespace EvilEye.Module.Safety
 {
     class Anti9 : BaseModule, OnEventEvent
     {
-        public Anti9() : base("Event9", "Anti for the Event9 Exploit", Main.Instance.safetyButton, null, true, true)
+        public static bool block9;
+
+        public Anti9() : base("Event9\nDisabled", "Anti for the Event9 Exploit", Main.Instance.safetyButton, null, true, true)
         {
+            Anti9.block9 = !Anti9.block9;
+            this.name = $"Event9\n{(Anti9.block9 ? "Enabled" : "Disabled")}";
         }
 
         public override void OnEnable()
@@ -29,6 +33,10 @@ namespace EvilEye.Module.Safety
 
         public bool OnEvent(EventData eventData)
         {
+
+
+            if (eventData.Code == 9 && block9) return false;
+
             if (eventData.Code == 9)
             {
                 if (eventData.Parameters[245].ToString().Length > 150)

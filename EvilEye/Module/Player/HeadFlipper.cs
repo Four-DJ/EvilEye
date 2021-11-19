@@ -8,6 +8,8 @@ using EvilEye.SDK;
 using EvilEye.Module;
 using EvilEye.Events;
 using VRC.DataModel;
+using VRC;
+using VRC.Core;
 
 namespace EvilEye.Module.Player
 {
@@ -15,18 +17,17 @@ namespace EvilEye.Module.Player
     {
 
         public HeadFlipper() : base("HeadFlipper", "Fuck your desktop neck", Main.Instance.playerButton, null, true) { }
-        NeckRange original;
-        MonoBehaviourPublicObSiBoSiVeBoQuVeBoSiUnique neck;
+        private NeckRange orgin;
+
         public override void OnEnable()
         {
-            neck = GameObject.Find("/_Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Neck").GetComponent<MonoBehaviourPublicObSiBoSiVeBoQuVeBoSiUnique>();
-            original = neck.field_Public_NeckRange_0;
-            neck.field_Public_NeckRange_0 = new NeckRange(-360, 360, 0);
+            orgin = VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<GamelikeInputController>().field_Protected_NeckMouseRotator_0.field_Public_NeckRange_0;
+            VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<GamelikeInputController>().field_Protected_NeckMouseRotator_0.field_Public_NeckRange_0 = new NeckRange(float.MinValue,float.MaxValue,0f);
         }
 
         public override void OnDisable()
         {
-            neck.field_Public_NeckRange_0 = original;
+            VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<GamelikeInputController>().field_Protected_NeckMouseRotator_0.field_Public_NeckRange_0 = orgin;
         }
     }
 }
