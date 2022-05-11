@@ -22,6 +22,7 @@ using UnityEngine.Networking;
 using VRC.SDKBase;
 using MelonLoader;
 using VRC.Networking;
+using Player = VRC.Player;
 
 namespace EvilEye
 {
@@ -109,8 +110,12 @@ namespace EvilEye
             {
                 return;
             }
+
+            if (player == PlayerWrapper.LocalPlayer)
+                PlayerWrapper.PlayersActorID = new Dictionary<int, Player>();
             foreach (OnPlayerJoinEvent @event in Main.Instance.onPlayerJoinEvents)
                 @event.OnPlayerJoin(player);
+            PlayerWrapper.PlayersActorID.Add(player.GetActorNumber(), player);
         }
         private static void OnPlayerLeave(VRC.Player player)
         {
@@ -120,6 +125,7 @@ namespace EvilEye
             }
             foreach (OnPlayerLeaveEvent @event in Main.Instance.onPlayerLeaveEvents)
                 @event.PlayerLeave(player);
+            PlayerWrapper.PlayersActorID.Remove(player.GetActorNumber());
         }
 
         [Obfuscation(Exclude = true)]

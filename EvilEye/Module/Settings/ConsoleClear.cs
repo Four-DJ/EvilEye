@@ -22,7 +22,7 @@ namespace EvilEye.Module.Settings
             Console.WriteLine("                          ██╔══╝░░░╚████╔╝░██║██║░░░░░  ██╔══╝░░░░╚██╔╝░░██╔══╝░░                            ");
             Console.WriteLine("                          ███████╗░░╚██╔╝░░██║███████╗  ███████╗░░░██║░░░███████╗                            ");
             Console.WriteLine("                          ╚══════╝░░░╚═╝░░░╚═╝╚══════╝  ╚══════╝░░░╚═╝░░░╚══════╝                            ");
-            Console.WriteLine("                                 Beta Release By Four_DJ, Literal, and Fish.                                 ");
+            Console.WriteLine("                                               Free Version V1.0.2                                                ");
             Console.WriteLine("=============================================================================================================");
             Console.ForegroundColor = ConsoleColor.White;
             LoggerUtill.Log("Cleared Console!", ConsoleColor.Green);

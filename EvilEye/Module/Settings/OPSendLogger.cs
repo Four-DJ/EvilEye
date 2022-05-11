@@ -1,7 +1,7 @@
 ﻿using EvilEye.Events;
 using EvilEye.SDK;
 using EvilEye.SDK.ButtonAPI;
-using EvilEye.SDK.Photon;
+using EvilEye.SDK.PhotonSDK;
 using ExitGames.Client.Photon;
 using Newtonsoft.Json;
 using Photon.Realtime;
@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EvilEye.SDK.PhotonSDK;
 
 namespace EvilEye.Module.Settings
 {

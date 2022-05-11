@@ -8,7 +8,6 @@ using EvilEye.Module.Safety;
 using EvilEye.Module.Settings;
 using EvilEye.Module.World;
 using EvilEye.SDK;
-using EvilEye.SDK.AvatarFavorites;
 using EvilEye.SDK.ButtonAPI;
 using System;
 using System.Collections.Generic;
@@ -16,6 +15,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
+using EvilEye.Modules.Exploits;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 using VRC.Core;
@@ -52,8 +52,6 @@ namespace EvilEye
         public static void OnApplicationStart()
         {
             Main.Instance = new Main();
-            AviConfig.Instance = AviConfig.Load_AVIS_FAVE();
-            ClassInjector.RegisterTypeInIl2Cpp<CustomNameplate>();
             LoggerUtill.DisplayLogo();
 
             Task.Run(() =>
@@ -87,21 +85,17 @@ namespace EvilEye
             Main.Instance.quickMenuStuff = new QuickMenuStuff(); 
             QMTab mainTab = new QMTab("EvilEye", "EvilEye", "Watching You", Main.Instance.quickMenuStuff.Button_NameplateVisibleIcon.sprite);
 
-            //QMNestedButton world = Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World");
-            //QMNestedButton hacks = Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World");
-            //Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World");
-            //Main.Instance.worldhacksButton = new QMNestedButton(world.menuTransform, "World Hacks");  // my attempt at nested button inside of a nested button
+            
             Main.Instance.worldButton = new QMNestedButton(mainTab.menuTransform, "World");
             Main.Instance.playerButton = new QMNestedButton(mainTab.menuTransform, "Player");
             Main.Instance.movementButton = new QMNestedButton(mainTab.menuTransform, "Movement");
             Main.Instance.exploistButton = new QMNestedButton(mainTab.menuTransform, "Exploits");
-            Main.Instance.spoofersButton = new QMNestedButton(mainTab.menuTransform, "Spoofers");
             Main.Instance.safetyButton = new QMNestedButton(mainTab.menuTransform, "Safety");
             Main.Instance.rendererButton = new QMNestedButton(mainTab.menuTransform, "Renderer");
-            Main.Instance.botButton = new QMNestedButton(mainTab.menuTransform, "Bot");
             Main.Instance.settingsButton = new QMNestedButton(mainTab.menuTransform, "Settings");
 
             Main.Instance.modules.Add(new Fly());
+            Main.Instance.modules.Add(new Speed());
 
             Main.Instance.modules.Add(new AviToID());
             Main.Instance.modules.Add(new FPSUnlocker());
@@ -110,22 +104,17 @@ namespace EvilEye
             Main.Instance.modules.Add(new HeadFlipper());
             Main.Instance.modules.Add(new CopyUserID());
 
-            Main.Instance.modules.Add(new Event9());
+            
             Main.Instance.modules.Add(new UdonSpam());
-            //Main.Instance.modules.Add(new Event209());   Temp Disabled (Working on It some more)
-            //Main.Instance.modules.Add(new Event210());   Temp Disabled (Working on it some more)
             Main.Instance.modules.Add(new AssetBundleCrash());
             Main.Instance.modules.Add(new QuestCrash());
             Main.Instance.modules.Add(new FreezePlayer());
             Main.Instance.modules.Add(new VRCA());
             Main.Instance.modules.Add(new VRCW());
-            //Main.Instance.modules.Add(new GhostWalk());   Won't Raise the OPEvent :( unless they changed it
+            Main.Instance.modules.Add(new GhostWalk());   
 
             Main.Instance.modules.Add(new RateLimit());
-            Main.Instance.modules.Add(new AntiBot());
-            Main.Instance.modules.Add(new Anti9()); 
-            Main.Instance.modules.Add(new Anti209());
-            Main.Instance.modules.Add(new Anti210());
+            Main.Instance.modules.Add(new AntiInvalidEvent());
 
             Main.Instance.modules.Add(new OPSendLogger());
             Main.Instance.modules.Add(new UdonLogger());
@@ -136,10 +125,13 @@ namespace EvilEye
             Main.Instance.modules.Add(new QuickRestart());
 
             Main.Instance.modules.Add(new CapsuleEsp());
+            Main.Instance.modules.Add(new PlayerList());
 
             Main.Instance.modules.Add(new JoinByID());
             Main.Instance.modules.Add(new Rejoin());
             Main.Instance.modules.Add(new CopyWID());
+            Main.Instance.modules.Add(new ItemOrbit());
+            Main.Instance.modules.Add(new MasterLock());
 
             foreach (BaseModule module in Main.Instance.modules)
                 module.OnUIInit();
@@ -164,14 +156,7 @@ namespace EvilEye
                 if (avatar.releaseStatus == "public")
                     PlayerWrapper.ChangeAvatar(avatar.id);
             });
-            //new QMSingleButton(Main.Instance.quickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions").transform, "Add Fav", "Adds Avatar To Favorites", null, delegate
-            //{
-            //    ApiAvatar avatar = PlayerWrapper.GetByUsrID(Main.Instance.quickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_ApiAvatar_0;
-            //    if (avatar.releaseStatus == "public")
-            //        Avatar_Favorites.FaveAvi(avatar, 1);
-            //        AviConfig.Instance.SaveAviConfig();
-            //});
-
+            
             new QMSingleButton(Main.Instance.quickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions").transform, "Get UserID", "UserID", null, delegate
             {
                 APIUser SelectedPlayer = PlayerWrapper.GetByUsrID(Main.Instance.quickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;

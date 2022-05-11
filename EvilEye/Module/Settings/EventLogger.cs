@@ -1,7 +1,7 @@
 ﻿using EvilEye.Events;
 using EvilEye.SDK;
 using EvilEye.SDK.ButtonAPI;
-using EvilEye.SDK.Photon;
+using EvilEye.SDK.PhotonSDK;
 using ExitGames.Client.Photon;
 using Newtonsoft.Json;
 using System;
@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EvilEye.SDK.PhotonSDK;
 
 namespace EvilEye.Module.Settings
 {
@@ -35,7 +36,7 @@ namespace EvilEye.Module.Settings
             Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object> parameters = eventData.Parameters;
             byte code = eventData.Code;
             int sender = eventData.Sender;
-            VRC.Player player = PlayerWrapper.GetPlayerWithPlayerID(sender);
+            VRC.Player player = PlayerWrapper.GetPlayerByActorID(sender);
             string arg = player != null ? player.prop_APIUser_0.displayName : "Server";
             string arg2 = "";
             if (parameters != null)

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using VRC;
 using VRC.Core;
@@ -15,42 +13,42 @@ namespace EvilEye.SDK
 {
     static class PlayerWrapper
     {
-        public static Player[] GetAllPlayers() { return PlayerManager.prop_PlayerManager_0.prop_ArrayOf_Player_0; }
-      
+        //converted all the bs to one lines to clean the class
+        public static Dictionary<int, VRC.Player> PlayersActorID = new Dictionary<int, VRC.Player>();
+        public static Player[] GetAllPlayers() => PlayerManager.prop_PlayerManager_0.prop_ArrayOf_Player_0;
+        public static Player GetByUsrID(string usrID) => GetAllPlayers().First(x => x.prop_APIUser_0.id == usrID);
         public static void Teleport(this Player player) => LocalVRCPlayer.transform.position = player.prop_VRCPlayer_0.transform.position;
+        public static Player LocalPlayer => Player.prop_Player_0;
+        public static VRCPlayer LocalVRCPlayer => VRCPlayer.field_Internal_Static_VRCPlayer_0;
+        public static APIUser GetAPIUser(this VRC.Player player) => player.prop_APIUser_0;
+        public static float GetFrames(this Player player) => (player._playerNet.prop_Byte_0 != 0) ? Mathf.Floor(1000f / (float)player._playerNet.prop_Byte_0) : -1f;
+        public static short GetPing(this Player player) => player._playerNet.field_Private_Int16_0;
+        public static bool IsBot(this Player player) => player.GetPing() <= 0 && player.GetFrames() <= 0 || player.transform.position == Vector3.zero;
+        public static IUser GetSelectedUser(this SelectedUserMenuQM selectMenu) => selectMenu.field_Private_IUser_0;
+        public static Player GetPlayer(this VRCPlayer player) => player.prop_Player_0;
+        public static VRCPlayer GetVRCPlayer(this Player player) => player._vrcplayer;
+        public static Color GetTrustColor(this VRC.Player player) => VRCPlayer.Method_Public_Static_Color_APIUser_0(player.GetAPIUser());
+        public static APIUser GetAPIUser(this VRCPlayer Instance) => Instance.GetPlayer().GetAPIUser();
+        public static VRCPlayerApi GetVRCPlayerApi(this Player Instance) => Instance?.prop_VRCPlayerApi_0;
+        public static bool GetIsMaster(this Player Instance) => Instance.GetVRCPlayerApi().isMaster;
+        public static int GetActorNumber(this Player player) => player.GetVRCPlayerApi() != null ? player.GetVRCPlayerApi().playerId : -1;
+        public static void SetHide(this VRCPlayer Instance, bool State) => Instance.GetPlayer().SetHide(State);
+        public static void SetHide(this Player Instance, bool State) => Instance.transform.Find("ForwardDirection").gameObject.active = !State;
+        public static USpeaker GetUspeaker(this Player player) => player.prop_USpeaker_0;
+        public static ulong GetSteamID(this Player player) => (player.GetVRCPlayer().field_Private_UInt64_0 > 10000000000000000UL) ? player.GetVRCPlayer().field_Private_UInt64_0 : ulong.Parse(player.GetPhotonPlayer().prop_Hashtable_0["steamUserID"].ToString());
+        public static Photon.Realtime.Player GetPhotonPlayer(this Player player) => player.prop_Player_1;
 
-        public static string GetUserID => GetAPIUser(LocalPlayer).id; 
-        
-        public static Player GetByUsrID(string usrID)
+        public static void Tele2MousePos()
         {
-            return GetAllPlayers().First(x => x.prop_APIUser_0.id == usrID);
-        }
-        
-        public static Player LocalPlayer
-        {
-            get
-            {
-                return Player.prop_Player_0;
-            }
-        }
-
-        public static VRCPlayer LocalVRCPlayer
-        {
-            get
-            {
-                return VRCPlayer.field_Internal_Static_VRCPlayer_0;
-            }
-        }
-
-        public static APIUser GetAPIUser(this VRC.Player player)
-        {
-            return player.prop_APIUser_0;
+            Ray posF = new Ray(Camera.main.transform.position, Camera.main.transform.forward); //pos, directon 
+            RaycastHit[] PosData = Physics.RaycastAll(posF);
+            if (PosData.Length > 0) { RaycastHit pos = PosData[0]; VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.position = pos.point; }
         }
 
-        public static string GetFrames(this Player player)
+        public static string GetFramesColord(this Player player)
         {
-            float fps = (player._playerNet.prop_Byte_0 != 0) ? Mathf.Floor(1000f / (float)player._playerNet.prop_Byte_0) : -1f;
-            if(fps > 80)
+            float fps = player.GetFrames();
+            if (fps > 80)
                 return "<color=green>" + fps + "</color>";
             else if (fps > 30)
                 return "<color=yellow>" + fps + "</color>";
@@ -58,9 +56,9 @@ namespace EvilEye.SDK
                 return "<color=red>" + fps + "</color>";
         }
 
-        public static string GetPing(this Player player)
+        public static string GetPingColord(this Player player)
         {
-            short ping = player._playerNet.field_Private_Int16_0;
+            short ping = player.GetPing();
             if (ping > 150)
                 return "<color=red>" + ping + "</color>";
             else if (ping > 75)
@@ -71,91 +69,20 @@ namespace EvilEye.SDK
 
         public static string GetPlatform(this Player player)
         {
-            if (player.prop_APIUser_0.IsOnMobile)
+            if (player.GetAPIUser().IsOnMobile)
             {
                 return "<color=green>Q</color>";
-            } else if (player.prop_VRCPlayerApi_0.IsUserInVR()) 
+            }
+            else if (player.GetVRCPlayerApi().IsUserInVR())
             {
-                return "<color=yellow>V</color>";
+                return "<color=#CE00D5>V</color>";
             }
             else
             {
                 return "<color=grey>PC</color>";
             }
         }
-        public static int GetActorNumber(this Player player)
-        {
-            return player.GetVRCPlayerApi().playerId;
-        }
-        public static PlayerManager PManager
-        {
-            get
-            {
-                return PlayerManager.field_Private_Static_PlayerManager_0;
-            }
-        }
-        public static List<Player> AllPlayers
-        {
-            get
-            {
-                return PlayerWrapper.PManager.field_Private_List_1_Player_0.ToArray().ToList<Player>();
-            }
-        }
-        public static VRC.Player FetchPlayerWithNumber(int actorNumber)
-        {
-            foreach (VRC.Player player in PlayerManager.Method_Public_Static_ArrayOf_Player_0())
-            {
-                bool flag = player.Method_Public_Int32_0() == actorNumber; 
-                if (flag)
-                {
-                    return player;
-                }
-            }
-            return null;
-        }
-        public static Player GetPlayer2(int ActorNumber)
-        {
-            return (from p in PlayerWrapper.AllPlayers
-                    where p.GetActorNumber() == ActorNumber
-                    select p).FirstOrDefault<Player>();
-        }
-        public static IUser GetSelectedUser(this SelectedUserMenuQM selectMenu)
-        {
-            return selectMenu.field_Private_IUser_0;
-        }
 
-        public static void SetHide(this VRCPlayer Instance, bool State)
-        {
-            Instance._player.SetHide(State);
-        }
-        internal static VRCPlayer GetCurrentPlayer()
-        {
-            return VRCPlayer.field_Internal_Static_VRCPlayer_0;
-        }
-        public static Player GetPlayer(this VRCPlayer player)
-        {
-            return player.prop_Player_0;
-        }
-        public static APIUser GetAPIUser(this VRCPlayer Instance)
-        {
-            return Instance.GetPlayer().GetAPIUser();
-        }
-        public static VRCPlayerApi GetVRCPlayerApi(this Player Instance)
-        {
-            return (Instance == null) ? null : Instance.prop_VRCPlayerApi_0;
-        }
-        public static string UserID(this VRCPlayer Instance)
-        {
-            return Instance.GetAPIUser().id;
-        }
-        public static bool GetIsMaster(this Player Instance)
-        {
-            return Instance.GetVRCPlayerApi().isMaster;
-        }
-        public static string GetName(this Player player)
-        {
-            return player.GetAPIUser().displayName;
-        }
         public static void DelegateSafeInvoke(this Delegate @delegate, params object[] args)
         {
             Delegate[] invocationList = @delegate.GetInvocationList();
@@ -167,13 +94,9 @@ namespace EvilEye.SDK
                 }
                 catch (Exception ex)
                 {
-                    LoggerUtill.Log("Error while executing delegate:\n" + ex.ToString());
+                    LoggerUtill.Log("Error while executing delegate:\n" + ex.ToString(), ConsoleColor.Red);
                 }
             }
-        }
-        public static void SetHide(this Player Instance, bool State)
-        {
-            Instance.transform.Find("ForwardDirection").gameObject.active = !State;
         }
 
         public static void ChangeAvatar(string AvatarID)
@@ -186,17 +109,11 @@ namespace EvilEye.SDK
             component.ChangeToSelectedAvatar();
         }
 
-        public static Player GetPlayerWithPlayerID(int playerID)
+        public static Player GetPlayerByActorID(int actorId)
         {
-            for(int i = 0; i < GetAllPlayers().Length; i++)
-            {
-                if(GetAllPlayers()[i].prop_VRCPlayerApi_0.playerId == playerID)
-                {
-                    return GetAllPlayers()[i];
-                }
-            }
-
-            return null;
+            VRC.Player player = null;
+            PlayersActorID.TryGetValue(actorId, out player);
+            return player;
         }
     }
 }

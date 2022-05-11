@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EvilEye.SDK.Photon
+namespace EvilEye.SDK.PhotonSDK
 {
     static class Serialization
     {

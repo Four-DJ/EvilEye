@@ -15,18 +15,18 @@ namespace EvilEye.Module.Render
 
         public override void OnEnable ()
         {
-            foreach (VRC.Player player in PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0)
+            for(int i = 0; i < PlayerWrapper.GetAllPlayers().Length; i++)
             {
-                CapsuleEsp.HighlightPlayer(player, true);
+                CapsuleEsp.HighlightPlayer(PlayerWrapper.GetAllPlayers()[i], true);
             }
             Main.Instance.onPlayerJoinEvents.Add(this);
         }
 
         public override void OnDisable()
         {
-            foreach (VRC.Player player in PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0)
+            for (int i = 0; i < PlayerWrapper.GetAllPlayers().Length; i++)
             {
-                CapsuleEsp.HighlightPlayer(player, false);
+                CapsuleEsp.HighlightPlayer(PlayerWrapper.GetAllPlayers()[i], false);
             }
             Main.Instance.onPlayerJoinEvents.Remove(this);
         }

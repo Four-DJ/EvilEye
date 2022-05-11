@@ -9,9 +9,9 @@ namespace EvilEye.Module.World
 
         public override void OnEnable()
         {
-            if (PlayerWrapper.GetUserID != "")
-                Misc.SetClipboard(PlayerWrapper.GetUserID);
-            LoggerUtill.Log("User ID: " + PlayerWrapper.GetUserID + " Copied to clipboard.", ConsoleColor.Green);
+            if (PlayerWrapper.LocalPlayer.GetAPIUser().id != "")
+                Misc.SetClipboard(PlayerWrapper.LocalPlayer.GetAPIUser().id);
+            LoggerUtill.Log("User ID: " + PlayerWrapper.LocalPlayer.GetAPIUser().id + " Copied to clipboard.", ConsoleColor.Green);
         }
 
     }
